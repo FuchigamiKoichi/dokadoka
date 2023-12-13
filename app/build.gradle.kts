@@ -10,6 +10,10 @@ plugins {
     application
 }
 
+java {                                      
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -34,7 +38,13 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass.set("jp.ac.uryukyu.ie.e235703_e235714_e35726_e235753_e235758.App")
+    mainClass.set("Main")
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "Main"
+    }
 }
 
 tasks.named<Test>("test") {
