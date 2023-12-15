@@ -61,6 +61,7 @@ public class FightCharacter extends Character{;
     }
 
     @Override
+    //キャラ情報を表示するためのメソッド
     public void displayInfo(){
         System.out.println("name: " + this.getName());
         System.out.println("health: " + this.health);
@@ -68,6 +69,7 @@ public class FightCharacter extends Character{;
         System.out.println("Level: " + this.level);
     }
 
+    //レベルアップについてのメソッド
     public void LevelUp(){
         System.out.println(this.getName() + ": レベル" + this.level + "→" + "レベル" + (level + 1) + "!!!");
         this.level ++;
@@ -76,6 +78,7 @@ public class FightCharacter extends Character{;
         this.EXP -= EXPERIENCE_TO_NEXTLEVEL;
     }
 
+    //経験値を入手するメソッド
     public void gainEXP(double obtainedEXP){
         this.EXP += obtainedEXP;
         System.out.println("獲得経験値(" + this.getName() + ") :" + obtainedEXP + "EXP");

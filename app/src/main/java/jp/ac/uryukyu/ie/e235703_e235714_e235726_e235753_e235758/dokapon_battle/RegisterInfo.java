@@ -19,11 +19,12 @@ public class RegisterInfo {
         Scanner scanner = new Scanner(System.in); 
         RegisterInfo RI = new RegisterInfo();
 
+        //人数入力
         System.out.println("人数を入力してください");
-        //playNum = scanner.nextInt();
         RI.setPlayNum(scanner.nextInt());
         System.out.println("遊ぶ人数 : " + RI.playNum + "人");//人数をコマンドラインから取得
         scanner.nextLine();//改行文字をクリア
+
 
         String[] names = new String[RI.playNum];
         String[] jobs = new String[4];
@@ -32,6 +33,8 @@ public class RegisterInfo {
         for(int i = 0;i < RI.playNum; i++){
             System.out.println("名前を入力してください (" + (i + 1) + "/" + RI.playNum + "):");
             names[i] = scanner.nextLine();//名前を取得
+            
+            //人数分の職業を選択
             System.out.println("職業を選択してください");
             System.out.println("1. ウォリアー");
             System.out.println("2. マジシャン");
@@ -83,7 +86,6 @@ public class RegisterInfo {
             System.out.println((i + 1) + ". " + names[i]);
         }
     }
-        
         
     //配列内をシャッフルするメソッド
     public static void shuffleArray(String[] array){

@@ -26,7 +26,6 @@ public class User implements Comparable<User>{
     }
 
     public int compareTo(User otherUser){
-        
         return Integer.compare(this.playerRanking,otherUser.playerRanking);
     }
 

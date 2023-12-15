@@ -1,6 +1,6 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 
-public class Warrior extends FightCharacter{
+public class Warrior extends Occupation{
     int money;
     private double EXP;
     private int level = 1;
@@ -36,5 +36,4 @@ public class Warrior extends FightCharacter{
     public void setMoney(int obtainedMoney){
         this.money = obtainedMoney;
     } 
-
 }

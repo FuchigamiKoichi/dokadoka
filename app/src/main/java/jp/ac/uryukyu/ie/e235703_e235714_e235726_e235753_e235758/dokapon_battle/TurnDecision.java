@@ -2,7 +2,7 @@ package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameMaster{
+public class TurnDecision{
     String[] monsters;
     private FightCharacter target1;
     ArrayList <FightCharacter> order;
@@ -10,14 +10,8 @@ public class GameMaster{
     Enemy slime;
     
 
-    GameMaster(){
+    TurnDecision(){
         order = new ArrayList<>();
-        
-        //order.add(new Enemy("スライム",60, 4, 5, 3, 6));
-        //order.add(new Player("戦士", 100, 0, 0, 0, 0));
-        
-        //target1 = order.get(0);
-
     }
     /*先行後攻を決めるメソッド
     引数に敵を選択して、Playerと敵の先行後攻をランダムで決めるメソッド
@@ -37,7 +31,7 @@ public class GameMaster{
     }
 
     public static void main(String[] args) {
-        var master = new GameMaster();
+        var master = new TurnDecision();
         var warrior1 = new Warrior("戦士", 0, 0, 0, 0,0,0,"健康");
         var slime = new Enemy("スライム",0,0, 0, 0,0,0,"通常");
         ArrayList <FightCharacter> order = new ArrayList<>();
