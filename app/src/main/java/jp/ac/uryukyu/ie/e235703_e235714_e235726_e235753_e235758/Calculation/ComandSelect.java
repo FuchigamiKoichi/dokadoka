@@ -1,4 +1,4 @@
-package jp.ac.uryukyu.ie.e235703.Calculation;
+package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Calculation;
 import java.util.Scanner;
 
 //import org.checkerframework.common.value.qual.StringVal;
@@ -10,9 +10,11 @@ public class ComandSelect {//コマンドを選択させるクラス
 
         System.out.println("数字を選択してください");
         System.out.println("[1:こうげき 2:まほう 3:ひっさつ 4:バフ]");
-        int comand = sc.nextInt();
+        int comand1 = sc.nextInt();
         //ここにコマンド変数に保存する機能を入れたい
-        return comand;
+        
+
+        return comand1;
     }
 
     public int D_comand_Select(){
