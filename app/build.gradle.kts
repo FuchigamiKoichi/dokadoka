@@ -41,13 +41,24 @@ application {
     mainClass.set("Main")
 }
 
+<<<<<<< HEAD
+=======
+tasks.named<Test>("test") {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+>>>>>>> origin/e235726
 tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "Main"
     }
 }
+<<<<<<< HEAD
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+=======
+>>>>>>> origin/e235726
