@@ -101,10 +101,6 @@ public class FightCharacter extends Character{;
         }
     }
 
-    public void turnRestriction(){
-        System.out.println("残り1ターン休み");
-    }
-
     @Override
     public void execute(FightCharacter executer,FightCharacter target){
         target.HP -= executer.AT;//仮実装

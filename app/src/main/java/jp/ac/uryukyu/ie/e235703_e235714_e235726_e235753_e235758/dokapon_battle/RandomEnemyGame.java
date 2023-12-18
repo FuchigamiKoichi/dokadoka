@@ -14,13 +14,16 @@ public class RandomEnemyGame {
         }
     }
 
-        public static boolean encounterEnemy(){
-            Random random = new Random();
-            int encounterChance = random.nextInt(100);
+    //一定の確率でモンスターに出会うメソッド
+    public static boolean encounterEnemy(){
+        Random random = new Random();
+        int encounterChance = random.nextInt(100);
+        //モンスター個別で、出現率を設定したい
+        Enemy[] enemyList;
 
-            //60%の確率で敵が出現する
-            return encounterChance < 60;
-        }
+        //60%の確率で敵が出現する
+        return encounterChance < 60;
+    }
 
 
     

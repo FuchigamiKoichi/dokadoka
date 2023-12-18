@@ -8,9 +8,6 @@ public class King {
     }
     
     
-    //HPの最大値を増やしていきたい
-    
-    
     public static void main(String[] args) {
         FightCharacter FC = new FightCharacter("John", 0, 0, 0, 0, 100, "毒");
         King king = new King();

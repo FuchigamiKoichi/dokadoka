@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Random;
 
+//プレイヤーの初期情報を設定するためのクラス
 public class RegisterInfo {
     private int playNum;
 
+    //プレイ人数におけるゲッターとセッター
     public int getPlayNum(){
         return playNum;
     }
-
     public void setPlayNum(int playNum){
         this.playNum = playNum;
     }
