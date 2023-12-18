@@ -1,5 +1,7 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758;
 
+import java.util.HashMap;
+
 public class GameMapTest {
     /*public static void main(String[] args) {
         testGameMapInitialization();
@@ -45,5 +47,24 @@ public class GameMapTest {
         
         System.out.println("Player initialization test completed.");
     }*/
+    // テストケース1: マップの生成と情報表示のテスト
+    public static void testMapCreation() {
+        int mapSize = 10; // テスト用の小さなマップサイズを設定
+        GameMap gameMap = new GameMap(mapSize); // マップを生成
+
+        // マップサイズが正しく設定されているかを確認
+        int actualSize = gameMap.getSize();
+        System.out.println("Map Size: " + actualSize);
+        
+        // マス目が正しく初期化されているかを確認
+        HashMap<Integer, MapSquare> squares = gameMap.getSquares();
+        System.out.println("Squares: " + squares);
+    }
+
+    public static void main(String[] args) {
+        // マップの生成と情報表示のテストを実行
+        testMapCreation();
+    }
 }
+
 
