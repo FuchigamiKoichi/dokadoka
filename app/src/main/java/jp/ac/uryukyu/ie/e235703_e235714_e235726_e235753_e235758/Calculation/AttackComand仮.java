@@ -1,17 +1,15 @@
-package jp.ac.uryukyu.ie.e235703.Calculation;
-import java.util.ArrayList;
+package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Calculation;
 
 
-public class AttackComand {
-
-    public double attackComand(){
+/*public class AttackComand {
+double allAttack;
+    public double attackComand(Character仮 execter, Character仮 target){
+        //呼び出し時；attackComand(勇者, スライム)
         ComandSelect CS = new ComandSelect();
         int comand2 = CS.D_comand_Select();
-        double allAttack = (player.getAttack()*7/3*target.getDefance())*attack_DefanceRate(comand2)*weaponRate*Math.random();
+        allAttack = (execter.getAttack()*7/3*target.getDefance())*attack_DefanceRate(comand2)*weaponRate*Math.random();
         return allAttack;
     }
-
-    
     
     //防御コマンド選択メソッド
     public static double attack_DefanceRate(int comand2){
@@ -34,8 +32,7 @@ public class AttackComand {
     static double a_counter = 2.16;
     static double a_down = 2.4;
 
-
     //得意武器判断メソッド
     double weaponRate = 1.0;
 
-}
+}*/

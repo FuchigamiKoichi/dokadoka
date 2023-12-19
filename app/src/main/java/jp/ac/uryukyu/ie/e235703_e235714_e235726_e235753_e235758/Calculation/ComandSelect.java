@@ -11,9 +11,7 @@ public class ComandSelect {//コマンドを選択させるクラス
         System.out.println("数字を選択してください");
         System.out.println("[1:こうげき 2:まほう 3:ひっさつ 4:バフ]");
         int comand1 = sc.nextInt();
-        //ここにコマンド変数に保存する機能を入れたい
         
-
         return comand1;
     }
 
@@ -32,3 +30,5 @@ public class ComandSelect {//コマンドを選択させるクラス
         System.out.println(COMAND+"を選択しました！");
     }
 }
+
+//ここのクラスで4は扱う。4が選ばれれば強制的に違うクラスに飛ばす
