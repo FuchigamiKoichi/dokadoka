@@ -9,8 +9,8 @@ public class Occupation extends FightCharacter{
     private double EXP;
     private int level = 1;
 
-    Occupation(String name,int HP ,int SP,int DF,int AT,int MP,String health){
-        super(name, HP, SP, DF, AT, MP,health);
+    Occupation(String name,int HP ,int SP,int DF,int AT,int MP,int money,String health){
+        super(name, HP, SP, DF, AT, MP,money,health);
     }
 
     

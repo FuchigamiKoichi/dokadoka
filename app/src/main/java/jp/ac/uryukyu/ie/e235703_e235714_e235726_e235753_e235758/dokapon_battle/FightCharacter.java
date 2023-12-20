@@ -16,8 +16,8 @@ public class FightCharacter extends Character{;
     
     
 
-    public FightCharacter(String name,double HP ,int SP,int DF,int AT,int MP,String health){
-        super(name);
+    public FightCharacter(String name,double HP ,int SP,int DF,int AT,int MP,int money,String health){
+        super(name,money);
         this.HP = HP;
         this.MP = MP;
         this.SP = SP;
@@ -132,7 +132,7 @@ public class FightCharacter extends Character{;
     */
 
     public static void main(String[] args) {
-        FightCharacter FC = new FightCharacter("Ken",30, 0, 0, 0, 0, "健康");
+        FightCharacter FC = new FightCharacter("Ken",30, 0, 0, 0, 0, 0,"健康");
         System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " + "EXP:" + FC.getEXP());
         
         FC.gainEXP(100);

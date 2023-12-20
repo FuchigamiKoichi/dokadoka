@@ -9,7 +9,7 @@ public class King {
     
     
     public static void main(String[] args) {
-        FightCharacter FC = new FightCharacter("John", 0, 0, 0, 0, 100, "毒");
+        FightCharacter FC = new FightCharacter("John", 0, 0, 0, 0, 100,500, "毒");
         King king = new King();
         System.out.println("勇者" + FC.getName() + "よ!\n" + "よくぞ戻ったダバ");
         System.out.println("ガンバってるようダバ、" + "まずは、キズついた体を治してあげるダバ!");

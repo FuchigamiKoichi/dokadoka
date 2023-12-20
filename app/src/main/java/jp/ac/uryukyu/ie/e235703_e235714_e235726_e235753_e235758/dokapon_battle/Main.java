@@ -2,8 +2,8 @@ package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 
 public class Main {
     public static void main(String[] args) {
-        FightCharacter p1 = new FightCharacter("勇者1",15,5,2,44,2,"健康");
-        FightCharacter p2 = new FightCharacter("勇者2",50,12,8,20,4,"健康");
+        FightCharacter p1 = new FightCharacter("勇者1",15,5,2,44,2,400,"健康");
+        FightCharacter p2 = new FightCharacter("勇者2",50,12,8,20,4,1000,"健康");
 
         ComandSelect comandSelect = new ComandSelect();
 

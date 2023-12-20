@@ -75,12 +75,14 @@ class MagicalComand extends Attack{
     @Override
     public double Attack(FightCharacter execter, FightCharacter target){
         ComandSelect CS = new ComandSelect();
+        ZenyTake zenyTake = new ZenyTake();
         comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
         if(comand2 == 4){
             System.out.println("降参しました");
             System.out.println(target.getName() + "の負け!!");
             System.exit(0);
         }else{
+            zenyTake.execute(execter,target);
             allAttack = (execter.getMG()*7/3-target.getMG())*magical_DefanceRate(comand2)*magicalRate()*magical_D_Rate()/*generateRandomNumbers()*/;
             target.takenDamage(allAttack);
         }
@@ -138,6 +140,7 @@ class SpecialComand extends Attack{
     double allAttack;
     FightCharacter player;
     FightCharacter enemy;
+    int comand2;//battleで呼び出す
     @Override
     public double Attack(FightCharacter execter, FightCharacter target){
         //必殺カウンターで使う
@@ -145,17 +148,27 @@ class SpecialComand extends Attack{
         this.enemy = target;
 
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
+        comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
+        
         if(comand2 == 4){
             System.out.println("降参しました");
             System.out.println(target.getName() + "の負け!!");
             System.exit(0);
+        }else if(comand2 == 3){
+            allAttack = (execter.getAttack()+execter.getMG()+execter.getSP())*2.5-(target.getDefance()+target.getMG()+target.getSP())*7/3*defanceRate(comand2,execter,target)*weaponRate/*generateRandomNumbers()*/;
+            execter.takenDamage(allAttack);
         }else{
             allAttack = (execter.getAttack()+execter.getMG()+execter.getSP())*2.5-(target.getDefance()+target.getMG()+target.getSP())*7/3*defanceRate(comand2,execter,target)*weaponRate/*generateRandomNumbers()*/;
             target.takenDamage(allAttack);
         }
         return allAttack;
     }
+
+    //comand2の情報を呼び出す
+    public int getComand2_アタッククラス(){
+        return comand2;
+    }
+
     //防御コマンド選択メソッド
     public double defanceRate(int comand2,FightCharacter execter, FightCharacter target){
         double result = 0;

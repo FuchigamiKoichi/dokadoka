@@ -4,8 +4,9 @@ public class Character {
     boolean dead = false;
     private int money;
 
-    Character(String name){
+    Character(String name,int money){
         this.name = name;
+        this.money = money;
     }
 
     public String getName(){
