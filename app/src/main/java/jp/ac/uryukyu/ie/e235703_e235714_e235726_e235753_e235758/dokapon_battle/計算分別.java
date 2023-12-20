@@ -6,7 +6,6 @@ public class 計算分別 {
          if(comand1 == 1){ //こうげきクラス
             AttackComand AC = new AttackComand();
             allAttack = AC.Attack(execter, target);
-            
          }
          if(comand1 == 2){
             MagicalComand MC = new MagicalComand();
@@ -16,8 +15,9 @@ public class 計算分別 {
             SpecialComand specal = new SpecialComand();
             allAttack = specal.Attack(execter, target);
          }
-         /*if(comand1 == 4){
-            double allAttack = どうしましょ
+         /* 
+         if(comand1 == 4){
+            allAttack = 
          }*/
          return allAttack;
       }

@@ -16,10 +16,17 @@ class AttackComand extends Attack{
     public double Attack(FightCharacter execter, FightCharacter target){
         //呼び出し時；attackComand(勇者, スライム)
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select();//相手のコマンドが入力される
-        allAttack = (execter.getAttack()*7/3-target.getDefance())*attack_DefanceRate(comand2)*weaponRate/*generateRandomNumbers()*/;
-        System.out.println(execter.getAttack());
-        System.out.println(execter.getAttack()*7/3-target.getDefance());
+        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
+        if(comand2 == 4){
+            System.out.println("降参しました");
+            System.out.println(target.getName() + "の負け!!");
+            System.exit(0);
+        }else{
+            allAttack = (execter.getAttack()*7/3-target.getDefance())*attack_DefanceRate(comand2)*weaponRate/*generateRandomNumbers()*/;
+            System.out.println(execter.getAttack());
+            System.out.println(execter.getAttack()*7/3-target.getDefance());
+            target.takenDamage(allAttack);
+        }
         return allAttack;
     }
     
@@ -64,11 +71,19 @@ class AttackComand extends Attack{
  */
 class MagicalComand extends Attack{
     double allAttack;
+    int comand2;
     @Override
     public double Attack(FightCharacter execter, FightCharacter target){
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select();//相手のコマンドが入力される
-        allAttack = (execter.getMG()*7/3-target.getMG())*magical_DefanceRate(comand2)*magicalRate()*magical_D_Rate()/*generateRandomNumbers()*/;
+        comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
+        if(comand2 == 4){
+            System.out.println("降参しました");
+            System.out.println(target.getName() + "の負け!!");
+            System.exit(0);
+        }else{
+            allAttack = (execter.getMG()*7/3-target.getMG())*magical_DefanceRate(comand2)*magicalRate()*magical_D_Rate()/*generateRandomNumbers()*/;
+            target.takenDamage(allAttack);
+        }
         return allAttack;
     }
 
@@ -130,23 +145,30 @@ class SpecialComand extends Attack{
         this.enemy = target;
 
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select();//相手のコマンドが入力される
-        allAttack = (execter.getAttack()+execter.getMG()+execter.getSP())*2.5-(target.getDefance()+target.getMG()+target.getSP())*7/3*defanceRate(comand2,execter,target)*weaponRate/*generateRandomNumbers()*/;
+        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
+        if(comand2 == 4){
+            System.out.println("降参しました");
+            System.out.println(target.getName() + "の負け!!");
+            System.exit(0);
+        }else{
+            allAttack = (execter.getAttack()+execter.getMG()+execter.getSP())*2.5-(target.getDefance()+target.getMG()+target.getSP())*7/3*defanceRate(comand2,execter,target)*weaponRate/*generateRandomNumbers()*/;
+            target.takenDamage(allAttack);
+        }
         return allAttack;
     }
     //防御コマンド選択メソッド
     public double defanceRate(int comand2,FightCharacter execter, FightCharacter target){
-        double reslut = 0;
+        double result = 0;
         if(comand2 == 1){
-            reslut = a_df;
+            result = a_df;
         }
         if (comand2 == 2) {
-            reslut = a_mdf;
+            result = a_mdf;
         }
         if (comand2 == 3) {
-            reslut = a_counter;
+            result = a_counter;
         }
-        return reslut;
+        return result;
     }
 
     //必殺*カウンターコマンド

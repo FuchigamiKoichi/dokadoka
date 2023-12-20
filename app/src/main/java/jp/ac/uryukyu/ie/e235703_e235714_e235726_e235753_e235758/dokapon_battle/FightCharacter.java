@@ -2,7 +2,7 @@ package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 import java.util.ArrayList;
 public class FightCharacter extends Character{;
     final int defaultHP = 100;
-    int HP;
+    double HP;
     int gainHP;
     int SP;
     int DF;
@@ -16,7 +16,7 @@ public class FightCharacter extends Character{;
     
     
 
-    public FightCharacter(String name,int HP ,int SP,int DF,int AT,int MP,String health){
+    public FightCharacter(String name,double HP ,int SP,int DF,int AT,int MP,String health){
         super(name);
         this.HP = HP;
         this.MP = MP;
@@ -66,11 +66,15 @@ public class FightCharacter extends Character{;
         this.health = health;
     }
 
-    public int getHP(){
+    public double getHP(){
         return this.HP;
     }
-    public void setHP(int HP){
+    public void setHP(double HP){
         this.HP = HP;
+    }
+
+    public void takenDamage(double damage){
+        this.HP -= damage;
     }
 
     @Override
@@ -137,8 +141,6 @@ public class FightCharacter extends Character{;
         FC.gainEXP(80);
         System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " +"EXP:" + FC.getEXP());
 
-        
-        
 
     }   
 }

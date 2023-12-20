@@ -7,7 +7,7 @@ public class Main {
 
         ComandSelect comandSelect = new ComandSelect();
 
-        int comand1 = comandSelect.A_comand_Select();
+        int comand1 = comandSelect.A_comand_Select(p2);
 
         計算分別 計算分別 = new 計算分別();
         double allAttack = 計算分別.Calculation(comand1,p2,p1);
