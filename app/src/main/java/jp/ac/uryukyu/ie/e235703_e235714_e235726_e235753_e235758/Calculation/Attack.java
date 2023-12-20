@@ -15,7 +15,7 @@ class AttackComand extends Attack{
     public double Attack(Character仮 execter, Character仮 target){
         //呼び出し時；attackComand(勇者, スライム)
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select();//相手のコマンドが入力される
+        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
         allAttack = (execter.getAttack()*7/3-target.getDefance())*attack_DefanceRate(comand2)*weaponRate/*generateRandomNumbers()*/;
         return allAttack;
     }
@@ -64,7 +64,7 @@ class MagicalComand extends Attack{
     @Override
     public double Attack(Character仮 execter, Character仮 target){
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select();//相手のコマンドが入力される
+        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
         allAttack = (execter.getMG()*7/3-target.getMG())*magical_DefanceRate(comand2)*magicalRate()*magical_D_Rate()/*generateRandomNumbers()*/;
         return allAttack;
     }
@@ -127,7 +127,7 @@ class SpecialComand extends Attack{
         this.enemy = target;
 
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select();//相手のコマンドが入力される
+        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
         allAttack = (execter.getAttack()+execter.getMG()+execter.getSP())*2.5-(target.getDefance()+target.getMG()+target.getSP())*7/3*defanceRate(comand2,execter,target)*weaponRate/*generateRandomNumbers()*/;
         return allAttack;
     }
