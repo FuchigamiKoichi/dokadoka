@@ -1,5 +1,5 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
-public class Character implements Action{
+public class Character {
     private String name;
     boolean dead = false;
     private int money;
@@ -38,11 +38,12 @@ public class Character implements Action{
         System.out.println("money: " + this.money);
     }
 
+    /* 
     @Override
     public void execute(FightCharacter executer,FightCharacter target){
         target.HP -= executer.AT;//仮実装
         System.out.println(this.name + "のこうげき");
         System.out.println(executer.getName() + "は" + target.getName() + "に" + executer.AT + "ダメージを与えた!!");
     }
-
+    */
 }

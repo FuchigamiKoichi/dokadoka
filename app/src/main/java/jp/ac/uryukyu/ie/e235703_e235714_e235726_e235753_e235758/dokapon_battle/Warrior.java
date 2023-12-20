@@ -12,7 +12,7 @@ public class Warrior extends Occupation{
         System.out.println(name + "のレベルは" + this.level + "です!!!");
         System.out.println();
     }
-    
+
     public double getEXP(){
         return this.EXP;
     }
@@ -36,4 +36,5 @@ public class Warrior extends Occupation{
     public void setMoney(int obtainedMoney){
         this.money = obtainedMoney;
     } 
+    
 }

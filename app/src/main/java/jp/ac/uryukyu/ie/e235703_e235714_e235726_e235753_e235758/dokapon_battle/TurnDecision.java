@@ -6,9 +6,10 @@ public class TurnDecision{
     String[] monsters;
     private FightCharacter target1;
     ArrayList <FightCharacter> order;
-    Warrior warrior1;
+    FightCharacter warrior1;
     Enemy slime;
-    
+    int advance;
+
 
     TurnDecision(){
         order = new ArrayList<>();
@@ -22,9 +23,11 @@ public class TurnDecision{
         
         //先行後攻を表示
         if (randomValue == 0){
+            advance = 0;
             System.out.println("先行 : " + target1.getName());
             System.out.println(target1.getName() + "のターン!!!");
         }else{
+            advance = 1;
             System.out.println("先行 : プレイヤー");
             System.out.println("プレイヤーのターン");
         }

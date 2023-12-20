@@ -7,7 +7,9 @@ public class Zombie extends Enemy{
     }
 
     public static void main(String[] args) {
-        Zombie zombie1 = new Zombie("ゾンビ", 0, 0, 0, 0, 0, 0, "通常");
+        Enemy zombie1 = new Zombie("ゾンビ", 0, 0, 0, 0, 0, 0, "通常");
+        zombie1.setObtainedEXP(130);
+        
         if(zombie1.HP <= 0){
             zombie1.EnemyDead();
         }

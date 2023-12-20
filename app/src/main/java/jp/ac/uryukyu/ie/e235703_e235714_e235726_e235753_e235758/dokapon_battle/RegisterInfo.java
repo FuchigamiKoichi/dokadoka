@@ -82,7 +82,9 @@ public class RegisterInfo {
         //サイコロを振る順番をランダムで決めるコード
         shuffleArray(names);//names内の要素をシャッフル
         System.out.println();
+        System.out.println("順番が決まったよ!!!");
         System.out.println("サイコロを振る順番:");
+        
         for(int i=0;i < names.length;i++){
             System.out.println((i + 1) + ". " + names[i]);
         }

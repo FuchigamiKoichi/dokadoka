@@ -13,7 +13,7 @@ public class FightCharacter extends Character{;
     final int defaultLevel = 1;
     private final int EXPERIENCE_TO_NEXTLEVEL = 100;
     private int level = 1;
-    ArrayList <Action> actions = new ArrayList<>();
+    
     
 
     public FightCharacter(String name,int HP ,int SP,int DF,int AT,int MP,String health){
@@ -25,8 +25,21 @@ public class FightCharacter extends Character{;
         this.AT = AT;
         this.health = health;
     }
-    public void addAction(Action action){
-        actions.add(action);
+    
+    public int getAttack(){
+        return this.AT;
+    }
+
+    public int getDefance(){
+        return this.DF;
+    }
+
+    public int getMG(){
+        return this.MP;
+    }
+
+    public int getSP(){
+        return this.SP;
     }
     
     public double getEXP(){
@@ -101,6 +114,7 @@ public class FightCharacter extends Character{;
         }
     }
 
+    /* 
     @Override
     public void execute(FightCharacter executer,FightCharacter target){
         target.HP -= executer.AT;//仮実装
@@ -111,6 +125,7 @@ public class FightCharacter extends Character{;
             target.die();
         }
     }
+    */
 
     public static void main(String[] args) {
         FightCharacter FC = new FightCharacter("Ken",30, 0, 0, 0, 0, "健康");
