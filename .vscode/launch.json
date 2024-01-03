@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "showtitle",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.showtitle",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Show",
             "request": "launch",
             "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Show",

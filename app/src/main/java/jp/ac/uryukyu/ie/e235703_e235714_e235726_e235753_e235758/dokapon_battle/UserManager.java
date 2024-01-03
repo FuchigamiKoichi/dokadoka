@@ -14,6 +14,10 @@ public class UserManager {
         users.add(user);
     }
 
+    public ArrayList<User> getUsers(){
+        return this.users;
+    }
+
     public void displayRankings(){
         System.out.println("プレイヤーランキング:");
         for(User user : users){

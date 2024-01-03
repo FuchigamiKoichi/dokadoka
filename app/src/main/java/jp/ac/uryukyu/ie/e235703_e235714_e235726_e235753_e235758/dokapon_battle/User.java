@@ -1,12 +1,25 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
+
+import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_sugoroku.Space;
+
 public class User implements Comparable<User>{
     private String playerName;
     private int playerRanking;
     private double totalAssets;
+    private Space point;
 
-    public User(String playerName,double totalAssets){
+    public User(String playerName,double totalAssets,Space point){
         this.playerName = playerName;
         this.totalAssets = totalAssets;
+        this.point = point;
+    }
+
+    public Space getSpace() {
+        return point;
+    }
+
+    public void setSpace(Space point) {
+        this.point = point;
     }
 
     public String getPlayerName(){
