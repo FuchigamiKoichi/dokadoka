@@ -11,8 +11,8 @@ public class Main {
 
         //本来は同じマス目にいるキャラクターがここに入ってくる
         //アレイリスト使ったら良さそう
-        Character仮 p1 = new Character仮("勇者1",15,5,2,2,2);
-        Character仮 p2 = new Character仮("勇者2",50,12,8,1,4);
+        Character仮 p1 = new Character仮("勇者1",15,5,2,13,2);
+        Character仮 p2 = new Character仮("勇者2",50,12,8,15,4);
 
         characters.add(p1);
         characters.add(p2);
@@ -54,9 +54,8 @@ public class Main {
             //後攻p1の攻撃
             int comand1_後攻 = comandSelect.A_comand_Select(p2);
             double allAttack_後攻 = 計算分別.Calculation(comand1_後攻,p2/*攻撃する人*/,p1);
-             System.out.println(p2.getName()+"は"+p1.getName()+"に"+allAttack_後攻+"ダメージ！！！");
-        }
-        
+            System.out.println(p2.getName()+"は"+p1.getName()+"に"+allAttack_後攻+"ダメージ！！！");
+        }    
     }
 } 
 
