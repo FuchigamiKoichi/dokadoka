@@ -12,8 +12,6 @@ class Dice1 extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-
-        //すごろく画面
         BufferedImage imgDice1 = null;
         Graphics2D g2 = (Graphics2D) g;
         String pathDice1 = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/dice1.png";
@@ -34,8 +32,6 @@ class Dice2 extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-
-        //すごろく画面
         BufferedImage imgDice2 = null;
         Graphics2D g2 = (Graphics2D) g;
         String pathDice2 = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/dice2.png";
@@ -56,8 +52,6 @@ class Dice3 extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-
-        //すごろく画面
         BufferedImage imgDice3 = null;
         Graphics2D g2 = (Graphics2D) g;
         String pathDice3 = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/dice3.png";
@@ -78,8 +72,6 @@ class Dice4 extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-
-        //すごろく画面
         BufferedImage imgDice4 = null;
         Graphics2D g2 = (Graphics2D) g;
         String pathDice4 = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/dice4.png";
@@ -100,8 +92,6 @@ class Dice5 extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-
-        //すごろく画面
         BufferedImage imgDice5 = null;
         Graphics2D g2 = (Graphics2D) g;
         String pathDice5 = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/dice5.png";
@@ -122,8 +112,6 @@ class Dice6 extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-
-        //すごろく画面
         BufferedImage imgDice6 = null;
         Graphics2D g2 = (Graphics2D) g;
         String pathDice6 = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/dice6.png";
@@ -153,5 +141,3 @@ class TurnShow extends JPanel{
         g.fillRect(0, 0, 400, 200);
     }
 }
-
-

@@ -42,6 +42,4 @@ public class User implements Comparable<User>{
         
         return Integer.compare(this.playerRanking,otherUser.playerRanking);
     }
-
-    //未履修
 }

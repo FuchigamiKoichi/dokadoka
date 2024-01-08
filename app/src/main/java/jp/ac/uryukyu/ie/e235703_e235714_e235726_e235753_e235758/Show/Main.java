@@ -26,10 +26,22 @@ public class Main extends JFrame{
     int cuser = 0;            //現在操作中のプレイヤー番号
     ArrayList<User> users;    //プレイヤーを格納する配列
     int walk = 0;                 //操作中のプレイヤーの何マス移動したか
+    
+
+    User usr;
+    Space clocate;
+    int cpoint;
+    int cx;
+    int cy;
 
     static int WIDTH = 1470;  //画面幅
     static int HEIGHT = 940;  //画面高さ
     int startSpace;  //スタート地点のマス番号
+
+    Font fm = new Font("ＭＳ ゴシック", Font.BOLD, 40);
+    int TURN = 20;  //ゲームの総ターン数
+    Map world = new Map(1);
+    ArrayList<Space> spaces = world.getSpaces();
 
   public static void main(String args[]) throws Exception{
     int WIDTH = Main.WIDTH;
@@ -46,12 +58,6 @@ public class Main extends JFrame{
 }
 
   Main() throws Exception{
-    Font fm = new Font("ＭＳ ゴシック", Font.BOLD, 40);
-    int TURN = 20;  //ゲームの総ターン数
-    Map world = new Map(1);
-    ArrayList<Space> spaces;
-    spaces = world.getSpaces();
-
     for(Space space : spaces){
         if (space.getEvent().getName().equals("スタート")){
             startSpace = space.getPoint();
@@ -64,6 +70,11 @@ public class Main extends JFrame{
     //すごろく画面
     Sugo map = new Sugo();
     map.setLayout(null);
+
+    Bottom bt = new Bottom();
+    bt.setLayout(null);
+    bt.setBounds(0, 0, WIDTH, HEIGHT);
+    map.add(bt);
 
     DicePanel dicePanel = new DicePanel();  //すごろくの目の画像を貼るためのパネル
     dicePanel.setBounds(WIDTH - 220,20,200,100);
@@ -79,69 +90,213 @@ public class Main extends JFrame{
 
     JButton random = new JButton("ダイスを振る！");   //ダイスを振るボタン
     random.setFont(fm);
-    random.setBounds(0,HEIGHT-70,500,70);
+    random.setBounds(0,HEIGHT-70,300,70);
     ActionListener randomaction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            User usr = users.get(cuser);
+            if(cuser < users.size()){
+                usr = users.get(cuser);
+                clocate = usr.getSpace();
+                cpoint = clocate.getPoint();
+                walk = 0;
 
-            tn.setText(String.valueOf(cturn) +" : "+ usr.getPlayerName() + "のターン");
-            validate();
+                cx = getx(clocate.getPoint());
+                cy = gety(clocate.getPoint());
 
-            Random rm = new Random();
-            int randomNumber = rm.nextInt(6) + 1;
-            dicePanel.removeAll();
-            
-            if(randomNumber == 1){
-                dicePanel.add(new Dice1());
-            }else if(randomNumber == 2){
-                dicePanel.add(new Dice2());
-            }else if(randomNumber == 3){
-                dicePanel.add(new Dice3());
-            }else if(randomNumber == 4){
-                dicePanel.add(new Dice4());
-            }else if(randomNumber == 5){
-                dicePanel.add(new Dice5());
-            }else if(randomNumber == 6){
-                dicePanel.add(new Dice6());
-            }
-            if(walk < randomNumber){
-                Move mv = new Move();
-
-                mv.removeAll();
-
-                JButton test = new JButton();
-                User cUser = users.get(cuser);
-                Space clocate = cUser.getSpace();
-
-                int cx = getx(clocate.getPoint());
-                int cy = gety(clocate.getPoint());
-
-                mv.setBounds(cx - 200, cy, 400, 400);
-                map.add(mv);
-                test.setFont(fm);
-                test.setVerticalAlignment(0);
-                test.setText("テスト");
-
-
-                System.out.println(spaces.get(startSpace-1).getWays());
-                
-                
-
-                mv.add(test);
-            }else if(cuser < users.size()){
-
-                cuser += 1;
-
+                tn.setText(String.valueOf(cturn) +" : "+ usr.getPlayerName() + "のターン");
                 validate();
+
+                Random rm = new Random();
+                int randomNumber = rm.nextInt(6) + 1;
+                dicePanel.removeAll();
+
+                
+                if(randomNumber == 1){
+                    dicePanel.add(new Dice1());
+                }else if(randomNumber == 2){
+                    dicePanel.add(new Dice2());
+                }else if(randomNumber == 3){
+                    dicePanel.add(new Dice3());
+                }else if(randomNumber == 4){
+                    dicePanel.add(new Dice4());
+                }else if(randomNumber == 5){
+                    dicePanel.add(new Dice5());
+                }else if(randomNumber == 6){
+                    dicePanel.add(new Dice6());
+                }
+
+                JButton walkCharacter = new JButton("歩く");
+                walkCharacter.setBounds(330, HEIGHT - 70, 300, 70);
+                walkCharacter.setFont(fm);
+                ActionListener walkAction = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (walk < randomNumber){
+                            usr = users.get(cuser);
+                            clocate = usr.getSpace();
+                            cpoint = clocate.getPoint();
+                            cx = getx(users.get(cuser).getSpace().getPoint());
+                            cy = gety(users.get(cuser).getSpace().getPoint());
+
+                            for(int way : spaces.get(cpoint - 1).getWays()){
+                                if((way - cpoint) == -15){
+                                    Move up = new Move();
+                                    JButton upButton = new JButton();
+                                    ActionListener upAction = new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            walk++;
+
+                                            users.get(cuser).setSpace(spaces.get(way-1));
+                                            bt.removeAll();
+
+                                            for(User user : users){
+                                                Test test =  new Test();
+                                                test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                bt.add(test);
+                                            }
+
+                                            bt.add(walkCharacter);
+                                            validate();
+                                            repaint();
+                                        };
+                                    };
+                                    upButton.addActionListener(upAction);
+
+                                    up.setBounds(cx - 150, cy - 100, 400, 400);
+                                    bt.add(up);
+                                    upButton.setFont(fm);
+                                    upButton.setText("上");
+                                    up.add(upButton);
+                                }else if ((way - cpoint) == -1){
+                                    Move left = new Move();
+
+                                    JButton leftButton = new JButton();
+                                    ActionListener leftAction =  new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            walk++;
+
+                                            users.get(cuser).setSpace(spaces.get(way-1));
+                                            bt.removeAll();
+
+                                            for(User user : users){
+                                                Test test =  new Test();
+                                                test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                bt.add(test);
+                                            }
+
+                                            bt.add(walkCharacter);
+                                            validate();
+                                            repaint();
+                                        };
+                                    };
+                                    leftButton.addActionListener(leftAction);
+
+                                    left.setBounds(cx - 500, cy, 400,400);
+                                    bt.add(left);
+                                    leftButton.setFont(fm);
+                                    leftButton.setText("左");
+                                    left.add(leftButton);
+                                }else if ((way - cpoint == 1)){
+                                    Move right = new Move();
+
+                                    JButton rightButton = new JButton();
+                                    ActionListener rigAction = new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            walk++;
+
+                                            users.get(cuser).setSpace(spaces.get(way-1));
+
+                                            bt.removeAll();
+
+                                            for(User user : users){
+                                                Test test =  new Test();
+                                                test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                bt.add(test);
+                                            }
+
+                                            bt.add(walkCharacter);
+                                            validate();
+                                            repaint();
+                                        };
+                                    };
+                                    rightButton.addActionListener(rigAction);
+
+                                    right.setBounds(cx + 100, cy, 400,400);
+                                    bt.add(right);
+                                    rightButton.setFont(fm);
+                                    rightButton.setText("右");
+                                    right.add(rightButton);
+                                }else if((way - cpoint) == 15){
+                                    Move down = new Move();
+
+                                    JButton downButton = new JButton();
+                                    ActionListener downAction = new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            walk++;
+
+                                            users.get(cuser).setSpace(spaces.get(way-1));
+
+                                            bt.removeAll();
+
+                                            for(User user : users){
+                                                Test test =  new Test();
+                                                test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                bt.add(test);
+                                            }
+
+                                            bt.add(walkCharacter);
+                                            validate();
+                                            repaint();
+                                        };
+                                    };
+                                    downButton.addActionListener(downAction);
+
+                                    down.setBounds(cx - 150, cy + 125, 400, 400);
+                                    bt.add(down);
+                                    downButton.setFont(fm);
+                                    downButton.setText("下");
+                                    down.add(downButton);
+                                }
+                            }
+                        validate();
+                        repaint();
+                        }else{
+                            walk = 0;
+                            cuser++;
+                            bt.add(random);
+                            validate();
+                            repaint();
+                        }
+                    };
+                };
+                walkCharacter.addActionListener(walkAction);
+
+                bt.add(walkCharacter);
             }else{
                 if(cturn <= TURN - 1){
                     cuser = 0;
                     cturn += 1;
 
-                    User u = users.get(cuser);
+                    bt.removeAll();
+                    usr = users.get(cuser);
+                    clocate = usr.getSpace();
+                    cpoint = clocate.getPoint();
+                    walk = 0;
 
-                    tn.setText(String.valueOf(cturn) +" : "+ u.getPlayerName() + "のターン");
+                    for(User user : users){
+                        Test test =  new Test();
+                        test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                        bt.add(test);
+                    }
+
+                    cx = getx(clocate.getPoint());
+                    cy = gety(clocate.getPoint());
+
+                    tn.setText(String.valueOf(cturn) +" : "+ usr.getPlayerName() + "のターン");
 
                     Random r = new Random();
                     int rN = r.nextInt(6) + 1;
@@ -161,6 +316,152 @@ public class Main extends JFrame{
                         dicePanel.add(new Dice6());
                     }
 
+                    JButton wC = new JButton("歩く");
+                    wC.setBounds(330, HEIGHT - 70, 300, 70);
+                    wC.setFont(fm);
+                    ActionListener wA = new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (walk < rN){
+                                cuser = 0;
+                                for(int way : spaces.get(cpoint - 1).getWays()){
+                                    if((way - cpoint) == -15){
+                                        Move up = new Move();
+                                        JButton upButton = new JButton();
+                                        ActionListener upAction = new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                walk++;
+
+                                                users.get(cuser).setSpace(spaces.get(way-1));
+                                                bt.removeAll();
+
+                                                for(User user : users){
+                                                    Test test =  new Test();
+                                                    test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                    bt.add(test);
+                                                }
+                                                bt.add(wC);
+
+                                                validate();
+                                                repaint();
+                                            };
+                                        };
+                                        upButton.addActionListener(upAction);
+
+                                        up.setBounds(cx - 150, cy - 100, 400, 400);
+                                        bt.add(up);
+                                        upButton.setFont(fm);
+                                        upButton.setText("上");
+                                        up.add(upButton);
+                                    }else if ((way - cpoint) == -1){
+                                        Move left = new Move();
+
+                                        JButton leftButton = new JButton();
+                                        ActionListener leftAction =  new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                walk++;
+
+                                                users.get(cuser).setSpace(spaces.get(way-1));
+                                                bt.removeAll();
+
+                                                for(User user : users){
+                                                    Test test =  new Test();
+                                                    test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                    bt.add(test);
+                                                }
+                                                bt.add(wC);
+
+                                                validate();
+                                                repaint();
+                                            };
+                                        };
+                                        leftButton.addActionListener(leftAction);
+
+                                        left.setBounds(cx - 500, cy, 400,400);
+                                        bt.add(left);
+                                        leftButton.setFont(fm);
+                                        leftButton.setText("左");
+                                        left.add(leftButton);
+                                    }else if ((way - cpoint == 1)){
+                                        Move right = new Move();
+
+                                        JButton rightButton = new JButton();
+                                        ActionListener rigAction = new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                walk++;
+
+                                                users.get(cuser).setSpace(spaces.get(way-1));
+
+                                                bt.removeAll();
+
+                                                for(User user : users){
+                                                    Test test =  new Test();
+                                                    test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                    bt.add(test);
+                                                }
+                                                bt.add(wC);
+
+                                                validate();
+                                                repaint();
+                                            };
+                                        };
+                                        rightButton.addActionListener(rigAction);
+
+                                        right.setBounds(cx + 100, cy, 400,400);
+                                        bt.add(right);
+                                        rightButton.setFont(fm);
+                                        rightButton.setText("右");
+                                        right.add(rightButton);
+                                    }else if((way - cpoint) == 15){
+                                        Move down = new Move();
+
+                                        JButton downButton = new JButton();
+                                        ActionListener downAction = new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                walk++;
+
+                                                users.get(cuser).setSpace(spaces.get(way-1));
+
+                                                bt.removeAll();
+
+                                                for(User user : users){
+                                                    Test test =  new Test();
+                                                    test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                                                    bt.add(test);
+                                                }
+                                                bt.add(wC);
+                                                
+                                                validate();
+                                                repaint();
+                                            };
+                                        };
+                                        downButton.addActionListener(downAction);
+
+                                        down.setBounds(cx - 150, cy + 125, 400, 400);
+                                        bt.add(down);
+                                        downButton.setFont(fm);
+                                        downButton.setText("下");
+                                        down.add(downButton);
+                                    }
+                                }
+                            validate();
+                            repaint();
+                            }else{
+                                cuser += 1;
+                                walk = 0;
+                                bt.add(random);
+                                validate();
+                                repaint();
+                            }
+                        };
+                    };
+                    wC.addActionListener(wA);
+
+                    bt.add(wC);
                     validate();
 
                     cuser += 1;
@@ -170,6 +471,7 @@ public class Main extends JFrame{
                     validate();
                 }
             }
+        map.remove(random);
         }
     };
     random.addActionListener(randomaction);
@@ -212,9 +514,16 @@ public class Main extends JFrame{
                 character.setText("キャラクター"+String.valueOf(user)+"の名前を教えて！");
 
                 users = players.getUsers();
+                for(User user : users){
+                    Test test =  new Test();
+                    test.setBounds(getx(user.getSpace().getPoint()), gety(user.getSpace().getPoint()), 50, 100);
+                    bt.add(test);
+                }
+
                 getContentPane().removeAll();
                 getContentPane().add(map);
                 validate();
+                repaint();
             }
         }
     };
@@ -267,14 +576,14 @@ public class Main extends JFrame{
     public int getx(int point) {
         int x;
         int xspace = point % 15;
-        x = 96 * (xspace - 1) + 17;
+        x = 96 * (xspace - 1) + 20;
         return x;
     }
 
     public int gety(int point) {
         int y;
         int yspace = (int) Math.ceil(point / 15);
-        y = (int) ( 101.5*yspace ) + 50;
+        y = (int) ( 101.5*yspace ) + 20;
         return y;
     }
 }
