@@ -134,6 +134,7 @@ class TurnShow extends JPanel{
 
     public TurnShow(){
         setPreferredSize(new Dimension(400, 200));
+        setLayout(null);
     }
 
     public void paintComponent(Graphics g){

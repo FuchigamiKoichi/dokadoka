@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.util.Random;
-import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,23 +40,33 @@ class Test extends JPanel{
  * MV
  * 移動処理のための変数等の格納
  */
-class MV {
+class MV extends JPanel{
     private Font fm = new Font("ＭＳ ゴシック", Font.BOLD, 40);
 
     private final int CHARACTERWIDTH = 50;
     private final int CHARACTERHEIGHT = 100;
 
     private int walk = 0; //キャラクターが何歩あるいたかを記録し、移動可能回数と比較する
-    private int limit; //移動可能限界回数、移動できる最大の歩数
     private Map world;
     private int Cuser = 0; //現在操作中のプレイヤー番号
     private ArrayList<User> users; //ユーザーを要素としてもつ配列
     private int Cpoint; //現在操作中のプレイヤーの現在地（マス番号）
+    private int turn = 1; //現在のターン
 
     private int randomNumber; //すごろくが出した目
 
     MV(Map world){
         this.world = world;
+        setOpaque(false);
+        setLayout(null);
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
     public int getRandomNumber() {
@@ -79,6 +88,9 @@ class MV {
     public int getCx(int cp) {
         int cx;
         int xpoint = cp %  15;
+        if(xpoint == 0){
+            xpoint = 15;
+        }
         cx = 96 * (xpoint - 1) + 20;
         return cx;
     }
@@ -86,17 +98,9 @@ class MV {
 
     public int getCy(int cp) {
         int cy;
-        int ypoint = (int) Math.ceil(cp / 15);
-        cy = (int) ( 101.5*ypoint ) + 20;
+        int ypoint = (int) Math.ceil((double) cp / 15);
+        cy = (int) ( 101.5*(ypoint - 1) ) + 20;
         return cy;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
     }
 
     public int getCuser() {
@@ -123,252 +127,352 @@ class MV {
         this.walk = walk;
     }
 
-    /**
-     * UButton
-     * キャラクターを上方に一マス移動させる
-     */
-    public class UButton extends JButton {
-        @Override
-        public void addActionListener(java.awt.event.ActionListener l) {
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setWalk(getWalk() + 1); //歩数をカウントする
+    @Override
+    protected void paintComponent(Graphics g) {
+        JButton upButton = new JButton();
+        JButton downButton = new JButton();
+        JButton leftButton = new JButton();
+        JButton rightButton = new JButton();
 
-                    Space way;
-                    way = world.getSpaces().get((getCpoint() - 15) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
-                    getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
+        JButton walkCharacter = new JButton();
+        JButton Shuffle = new JButton();
 
-                    //ユーザーの再表示
-                    removeAll();
+        ActionListener upAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setWalk(getWalk() + 1); //歩数をカウントする
 
-                    for (User u : getUsers()){
-                        Test test = new Test();
-                        test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    }
-                    
-                    validate();
-                    repaint();
+                Space way;
+                way = world.getSpaces().get((getCpoint() - 15) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
+                getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
+
+                //ユーザーの再表示
+                removeAll();
+
+                for (User u : getUsers()){
+                    Test test = new Test();
+                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(test);
                 }
-            };
-        }
-    }
-
-    /**
-     * DButton
-     * キャラクターを上方に一マス移動させる
-     */
-    public class DButton extends JButton {
-        @Override
-        public void addActionListener(java.awt.event.ActionListener l) {
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setWalk(getWalk() + 1); //歩数をカウントする
-
-                    Space way;
-                    way = world.getSpaces().get((getCpoint() + 15) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
-                    getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
-
-                    //ユーザーの再表示
+                
+                if(getRandomNumber() - getWalk()== 0){
                     removeAll();
-
-                    for (User u : getUsers()){
-                        Test test = new Test();
-                        test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    }
-                    
-                    validate();
-                    repaint();
+                    setWalk(0);
+                    setCuser(getCuser() + 1);
+                }else{
+                    add(walkCharacter);
                 }
-            };
-        }
-    }
 
-    /**
-     * RButton
-     * キャラクターを右に一マス移動させる
-     */
-    public class RButton extends JButton {
-        @Override
-        public void addActionListener(java.awt.event.ActionListener l) {
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setWalk(getWalk() + 1); //歩数をカウントする
+                validate();
+                repaint();
+            }
+        };
+        upButton.setFont(fm);
+        upButton.setText("上");
+        upButton.addActionListener(upAction);
 
-                    Space way;
-                    way = world.getSpaces().get((getCpoint() + 1) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
-                    getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
+        ActionListener downAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setWalk(getWalk() + 1); //歩数をカウントする
 
-                    //ユーザーの再表示
-                    removeAll();
+                Space way;
+                way = world.getSpaces().get((getCpoint() + 15) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
+                getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
 
-                    for (User u : getUsers()){
-                        Test test = new Test();
-                        test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    }
-                    
-                    validate();
-                    repaint();
+                //ユーザーの再表示
+                removeAll();
+
+                for (User u : getUsers()){
+                    Test test = new Test();
+                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(test);
                 }
-            };
-        }
-    }
-
-    /**
-     * LButton
-     * キャラクターを左に一マス移動させる
-     */
-    public class LButton extends JButton {
-        @Override
-        public void addActionListener(java.awt.event.ActionListener l) {
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setWalk(getWalk() + 1); //歩数をカウントする
-
-                    Space way;
-                    way = world.getSpaces().get((getCpoint() - 1) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
-                    getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
-
-                    //ユーザーの再表示
+                
+                if(getRandomNumber() - getWalk()== 0){
                     removeAll();
-
-                    for (User u : getUsers()){
-                        Test test = new Test();
-                        test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    }
-                    
-                    validate();
-                    repaint();
+                    setWalk(0);
+                    setCuser(getCuser() + 1);
+                }else{
+                    add(walkCharacter);
                 }
-            };
-        }
-    }
+                
+                validate();
+                repaint();
+            }
+        };
+        downButton.setFont(fm);
+        downButton.setText("下");
+        downButton.addActionListener(downAction);
 
-    /**
-     * walkCharacter
-     * 歩くボタンの実装
-     * プレイヤーが選択可能な行き先を提示し、移動するボタン（UButton,DButton,LButton,RButton）を設置
-     */
-    public class walkCharacter extends JButton{
-        @Override
-        public void addActionListener(ActionListener l) {
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+        ActionListener leftAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setWalk(getWalk() + 1); //歩数をカウントする
+
+                Space way;
+                way = world.getSpaces().get((getCpoint() - 1) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
+                getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
+
+                //ユーザーの再表示
+                removeAll();
+
+                for (User u : getUsers()){
+                    Test test = new Test();
+                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(test);
+                }
+                
+                if(getRandomNumber() - getWalk()== 0){
                     removeAll();
-                    Bottom bt = new Bottom();
-                    bt.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-                    bt.setLayout(null);
-                    add(bt);
+                    setWalk(0);
+                    setCuser(getCuser() + 1);
+                }else{
+                    add(walkCharacter);
+                }
+                
+                validate();
+                repaint();
+            }
+        };
+        leftButton.setFont(fm);
+        leftButton.setText("左");
+        leftButton.addActionListener(leftAction);
 
-                    JLabel turn = new JLabel(String.valueOf(getRandomNumber() - getWalk()));
-                    turn.setBounds(getCx(getCpoint()) + 20, getCy(getCpoint()) - 100, 400, 400);
-                    bt.add(turn);
+        ActionListener rightAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setWalk(getWalk() + 1); //歩数をカウントする
 
-                    if (getWalk() < getRandomNumber()){
-                        for(int way : getUsers().get(getCuser()).getSpace().getWays()){
-                            if((way - getCpoint()) == -15){
-                                UButton upButton = new UButton();
-                                upButton.setBounds(getCx(getCpoint()) - 150, getCy(getCpoint()) - 100, 400, 400);
-                                upButton.setFont(fm);
-                                upButton.setText("上");
-                                bt.add(upButton);
+                Space way;
+                way = world.getSpaces().get((getCpoint() + 1) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
+                getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
 
-                                turn.setText(String.valueOf(getRandomNumber() - getWalk()));
-                                turn.setBounds(getCx(getCpoint()) + 20, getCy(getCpoint()) - 100, 400, 400);
-                            }else if((way - getCpoint()) == 15){
-                                DButton downButton = new DButton();
-                                downButton.setBounds(getCx(getCpoint()) - 150, getCy(getCpoint()) + 125, 400, 400);
-                                downButton.setFont(fm);
-                                downButton.setText("下");
-                                bt.add(downButton);
+                //ユーザーの再表示
+                removeAll();
 
-                                turn.setText(String.valueOf(getRandomNumber() - getWalk()));
-                                turn.setBounds(getCx(getCpoint()) + 20, getCy(getCpoint()) - 100, 400, 400);
-                            }else if((way - getCpoint()) == -1){
-                                LButton leftbuButton = new LButton();
-                                leftbuButton.setBounds(getCx(getCpoint()) - 300, getCy(getCpoint()), 400, 400);
-                                leftbuButton.setFont(fm);
-                                leftbuButton.setText("左");
-                                bt.add(leftbuButton);
+                for (User u : getUsers()){
+                    Test test = new Test();
+                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(test);
+                }
+                
+                if(getRandomNumber() - getWalk()== 0){
+                    removeAll();
+                    setWalk(0);
+                    setCuser(getCuser() + 1);
+                }else{
+                    add(walkCharacter);
+                }
 
-                                turn.setText(String.valueOf(getRandomNumber() - getWalk()));
-                                turn.setBounds(getCx(getCpoint()) + 20, getCy(getCpoint()) - 100, 400, 400);
-                            }else if((way - getCpoint()) == 1){
-                                RButton rightButton = new RButton();
-                                rightButton.setBounds(getCx(getCpoint()) + 100, getCy(getCpoint()), 400, 400);
-                                rightButton.setFont(fm);
-                                rightButton.setText("右");
-                                bt.add(rightButton);
+                validate();
+                repaint();
+            }
+        };
+        rightButton.setFont(fm);
+        rightButton.setText("右");
+        rightButton.addActionListener(rightAction);
 
-                                turn.setText(String.valueOf(getRandomNumber() - getWalk()));
-                                turn.setBounds(getCx(getCpoint()) + 20, getCy(getCpoint()) - 100, 400, 400);
-                            }
+
+        ActionListener walk = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+                Bottom bt = new Bottom();
+                bt.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                bt.setLayout(null);
+                add(bt);
+
+                JLabel turn = new JLabel(String.valueOf(getRandomNumber() - getWalk()));
+                turn.setFont(fm);
+                bt.add(turn);
+
+                for (User u : getUsers()){
+                    Test test = new Test();
+                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    bt.add(test);
+                }
+
+                if (getWalk() < getRandomNumber()){
+                    for(int way : getUsers().get(getCuser()).getSpace().getWays()){
+                        if((way - getCpoint()) == -15){
+                            upButton.setBounds(getCx(getCpoint()), getCy(getCpoint()) - 100, 50, 50);
+                            upButton.setFont(fm);
+                            upButton.setText("上");
+                            bt.add(upButton);
+
+                            turn.setText(String.valueOf(getRandomNumber() - getWalk()));
+                            turn.setBounds(getCx(getCpoint()) + 100, getCy(getCpoint()) - 100, 50, 100);
+                        }else if((way - getCpoint()) == 15){
+                            downButton.setBounds(getCx(getCpoint()), getCy(getCpoint()) + 125, 50, 50);
+                            downButton.setFont(fm);
+                            downButton.setText("下");
+                            bt.add(downButton);
+
+                            turn.setText(String.valueOf(getRandomNumber() - getWalk()));
+                            turn.setBounds(getCx(getCpoint()) + 100, getCy(getCpoint()) - 100, 50, 100);
+                        }else if((way - getCpoint()) == -1){
+                            leftButton.setBounds(getCx(getCpoint()) - 100, getCy(getCpoint()), 50, 50);
+                            leftButton.setFont(fm);
+                            leftButton.setText("左");
+                            bt.add(leftButton);
+
+                            turn.setText(String.valueOf(getRandomNumber() - getWalk()));
+                            turn.setBounds(getCx(getCpoint()) + 100, getCy(getCpoint()) - 100, 50, 100);
+                        }else if((way - getCpoint()) == 1){
+                            rightButton.setBounds(getCx(getCpoint()) + 100, getCy(getCpoint()), 50, 50);
+                            rightButton.setFont(fm);
+                            rightButton.setText("右");
+                            bt.add(rightButton);
+
+                            turn.setText(String.valueOf(getRandomNumber() - getWalk()));
+                            turn.setBounds(getCx(getCpoint()) + 100, getCy(getCpoint()) - 100, 50, 100);
                         }
-                        if((getWalk() - getRandomNumber()) == 1){
-                            Shuffle dicebutton = new Shuffle();
-                            dicebutton.setBounds(0, Main.HEIGHT - 70, 300, 70);
-                            dicebutton.setFont(fm);
-                            dicebutton.setText("ダイスを振る！");
-                        }
-                    }else{
-                        remove(bt);
-                        setWalk(0);
-                        setCuser(getCuser() + 1);
                     }
+                    if((getWalk() - getRandomNumber()) == 1){
+                        Shuffle.setBounds(0, Main.HEIGHT - 70, 300, 70);
+                        Shuffle.setFont(fm);
+                        Shuffle.setText("ダイスを振る！");
+                    }
+                }else{
+                    remove(bt);
+                    setWalk(0);
+                    setCuser(getCuser() + 1);
+                }
+                validate();
+                repaint();
+            }
+        };
+        walkCharacter.setFont(fm);
+        walkCharacter.setText("歩く！");
+        walkCharacter.addActionListener(walk);
+
+        ActionListener shuffleAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+
+                Bottom dicepanel = new Bottom();
+                dicepanel.setBounds(Main.WIDTH-220, 20, 200, 100);
+                add(dicepanel);
+
+                TurnShow ts = new TurnShow();
+                ts.setBounds(Main.WIDTH - 700, Main.HEIGHT - 70, 600, 70);
+                add(ts);
+
+                JLabel turnShow = new JLabel();
+                turnShow.setFont(fm);
+                turnShow.setBounds(0, 0, 600, 70);
+                ts.add(turnShow);
+
+                if(getCuser() < getUsers().size()){
+
+                    turnShow.setText(String.valueOf(getTurn()) + "　:　" +String.valueOf(getUsers().get(getCuser()).getPlayerName())+"のターン");
+
+                    Random r = new Random();
+                    int randomNumber = r.nextInt(6) + 1;
+                    dicepanel.removeAll();
+
+                    if(randomNumber == 1){
+                        Dice1 d1 = new Dice1();
+                        d1.setBounds(0,0,100,100);
+                        dicepanel.add(d1);
+                    }else if(randomNumber == 2){
+                        Dice2 d2 = new Dice2();
+                        d2.setBounds(0,0,100,100);
+                        dicepanel.add(d2);
+                    }else if(randomNumber == 3){
+                        Dice3 d3 = new Dice3();
+                        d3.setBounds(0,0,100,100);
+                        dicepanel.add(d3);
+                    }else if(randomNumber == 4){
+                        Dice4 d4 = new Dice4();
+                        d4.setBounds(0,0,100,100);
+                        dicepanel.add(d4);
+                    }else if(randomNumber == 5){
+                        Dice5 d5 = new Dice5();
+                        d5.setBounds(0,0,100,100);
+                        dicepanel.add(d5);
+                    }else if(randomNumber == 6){
+                        Dice6 d6 = new Dice6();
+                        d6.setBounds(0,0,100,100);
+                        dicepanel.add(d6);
+                    }
+
+                    setRandomNumber(randomNumber);
+                    Bottom bottom = new Bottom();
+                    bottom.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                    add(bottom);
+                    walkCharacter.setBounds(330, Main.HEIGHT - 70, 300, 70);
+                    bottom.add(walkCharacter);
+                    
                     validate();
                     repaint();
-                }
-            };
-        }
-    }
+                }else{
+                    if (getTurn() < 5) {
+                        setCuser(0);
+                        setTurn(getTurn() + 1);
 
-    public class Shuffle extends JButton{
-        @Override
-        public void addActionListener(ActionListener l) {
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    removeAll();
-                    Bottom dicepanel = new Bottom();
-                    dicepanel.setBounds(Main.WIDTH-220, 20, 200, 100);
-                    add(dicepanel);
+                        turnShow.setText(String.valueOf(getTurn()) + "　:　" +String.valueOf(getUsers().get(getCuser()).getPlayerName())+"　のターン");
 
-                    if(getCuser() < getUsers().size()){
                         Random r = new Random();
                         int randomNumber = r.nextInt(6) + 1;
                         dicepanel.removeAll();
 
                         if(randomNumber == 1){
-                            dicepanel.add(new Dice1());
+                            Dice1 d1 = new Dice1();
+                            d1.setBounds(0,0,100,100);
+                            dicepanel.add(d1);
                         }else if(randomNumber == 2){
-                            dicepanel.add(new Dice2());
+                            Dice2 d2 = new Dice2();
+                            d2.setBounds(0,0,100,100);
+                            dicepanel.add(d2);
                         }else if(randomNumber == 3){
-                            dicepanel.add(new Dice3());
+                            Dice3 d3 = new Dice3();
+                            d3.setBounds(0,0,100,100);
+                            dicepanel.add(d3);
                         }else if(randomNumber == 4){
-                            dicepanel.add(new Dice4());
+                            Dice4 d4 = new Dice4();
+                            d4.setBounds(0,0,100,100);
+                            dicepanel.add(d4);
                         }else if(randomNumber == 5){
-                            dicepanel.add(new Dice5());
+                            Dice5 d5 = new Dice5();
+                            d5.setBounds(0,0,100,100);
+                            dicepanel.add(d5);
                         }else if(randomNumber == 6){
-                            dicepanel.add(new Dice6());
+                            Dice6 d6 = new Dice6();
+                            d6.setBounds(0,0,100,100);
+                            dicepanel.add(d6);
                         }
 
                         setRandomNumber(randomNumber);
                         Bottom bottom = new Bottom();
-                        walkCharacter wc = new walkCharacter();
-                        bottom.add(wc);
+                        bottom.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                        add(bottom);
+                        walkCharacter.setBounds(330, Main.HEIGHT - 70, 300, 70);
+                        bottom.add(walkCharacter);
+                        
+                        validate();
+                        repaint();
+                    }else{
+                        System.out.println("ゲームが終了");
                     }
                 }
-            };
-        }
+            }
+        };
+        Shuffle.addActionListener(shuffleAction);
+
+        Shuffle.setBounds(0, Main.HEIGHT - 70, 300, 70);
+        Shuffle.setFont(fm);
+        Shuffle.setText("ダイスを振る！");
+        add(Shuffle);
     }
 }
+
 
 class Bottom extends JPanel{
     Bottom(){
         setOpaque(false);
+        setLayout(null);
     }
 }
