@@ -1,0 +1,140 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "showtitle",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.showtitle",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Show",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Show",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Title",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Title",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Main",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "GameWindow",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.GameWindow",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Show",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Title",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Title",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.App",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "ShowTitle",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.ShowTitle",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Dice",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.Dice",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "FightCharacter",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.FightCharacter",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "GameMaster",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.GameMaster",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "King",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.King",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "MonsterAppearance",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.MonsterAppearance",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "RandomEnemyGame",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.RandomEnemyGame",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Rogue",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.Rogue",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "ZenyTake",
+            "request": "launch",
+            "mainClass": "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.ZenyTake",
+            "projectName": "app"
+        }
+    ]
+}
