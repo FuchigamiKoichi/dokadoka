@@ -1,6 +1,10 @@
-package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
+package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Dokapon_game;
 import java.util.ArrayList;
 import java.util.Random;
+
+import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.Enemy;
+import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.FightCharacter;
+import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.Warrior;
 
 public class TurnDecision{
     String[] monsters;

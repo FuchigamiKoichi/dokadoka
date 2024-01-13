@@ -14,11 +14,15 @@ public class battle {
         }
         return result;
     }
+
+    public void docaponBattle(FightCharacter p1,FightCharacter p2){
+        //ここに下で書いたバトルについてのコードをメソッド化したい
+    }
     
     public static void main(String[] args) {
 
         ArrayList<FightCharacter> characters = new ArrayList<>();
-        battle battle1 = new battle();
+        //battle battle1 = new battle();
 
         FightCharacter p1 = new FightCharacter("ぽん骨裕太",100,5,2,8,10,100,"健康");
         FightCharacter p2 = new FightCharacter("五条悟らない",50,12,4,10,10,1000,"健康");

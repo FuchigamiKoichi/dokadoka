@@ -13,6 +13,9 @@ public class FightCharacter extends Character{;
     final int defaultLevel = 1;
     private final int EXPERIENCE_TO_NEXTLEVEL = 100;
     private int level = 1;
+    ArrayList <Weapon> weapons = new ArrayList<>();
+    DefendWeapon defendWeapon;
+    AttackWeapon attackWeapon;
     
     
 
@@ -25,12 +28,20 @@ public class FightCharacter extends Character{;
         this.AT = AT;
         this.health = health;
     }
-    
-    public int getAttack(){
+
+    public int getAttack(){ //武器を所持しているときとそうでないときで分岐している
+        if(attackWeapon != null){
+            this.AT += attackWeapon.AT + defendWeapon.AT;
+            return this.AT;
+        }
         return this.AT;
     }
 
     public int getDefance(){
+        if(defendWeapon != null){
+            this.DF += attackWeapon.DF + defendWeapon.DF;
+            return this.DF;
+        }
         return this.DF;
     }
 
@@ -76,6 +87,9 @@ public class FightCharacter extends Character{;
     public void takenDamage(double damage){
         this.HP -= damage;
     }
+    
+    
+
 
     @Override
     //キャラ情報を表示するためのメソッド
@@ -117,22 +131,40 @@ public class FightCharacter extends Character{;
             System.out.println(this.getName() + "は生き返った!!");
         }
     }
+    
+    public void getAttackWeapon(AttackWeapon attackWeapon){
+        this.attackWeapon = attackWeapon;
+        System.out.println(attackWeapon.getName() + "を手に入れた!!");
+        weapons.add(attackWeapon);
+        System.out.println("{" + attackWeapon.getName() + "} 攻撃力: " + attackWeapon.AT);
+        System.out.println("{" + attackWeapon.getName() + "}防御力: " + attackWeapon.DF);
+        System.out.println("機能: " + attackWeapon.effect);
 
-    /* 
-    @Override
-    public void execute(FightCharacter executer,FightCharacter target){
-        target.HP -= executer.AT;//仮実装
-        System.out.println(executer.getName() + "のこうげき");
-        System.out.println(executer.getName() + "は" + target.getName() + "に" + executer.AT + "ダメージを与えた!!");
 
-        if(target.HP <= 0){
-            target.die();
+    }
+
+    public void getDefenseWeapon(DefendWeapon defendWeapon){
+        this.defendWeapon = defendWeapon;
+        System.out.println(defendWeapon.getName() + "を手に入れた!!");
+        weapons.add(defendWeapon);
+        System.out.println("{" + defendWeapon.getName() + "}攻撃力: " + defendWeapon.AT);
+        System.out.println("{" + defendWeapon.getName() + "}防御力: " + defendWeapon.DF);
+        System.out.println("機能: " + defendWeapon.effect);
+    }
+
+    public void displayWeapon(){
+        System.out.println("所持している武器の一覧: ");
+        for(Weapon weapon : weapons){
+            System.out.println(weapon.getName());
         }
     }
-    */
+    
 
+    
+    
+    
     public static void main(String[] args) {
-        FightCharacter FC = new FightCharacter("Ken",30, 0, 0, 0, 0, 0,"健康");
+        FightCharacter FC = new FightCharacter("Ken",30, 0, 4, 5, 0, 0,"健康");
         System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " + "EXP:" + FC.getEXP());
         
         FC.gainEXP(100);
@@ -140,6 +172,20 @@ public class FightCharacter extends Character{;
 
         FC.gainEXP(80);
         System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " +"EXP:" + FC.getEXP());
+
+
+        AttackWeapon sword = new AttackWeapon("ソード", 10, -1, 0, 0, 0,"眠り(確率1/8)");
+        DefendWeapon shield = new DefendWeapon("シールド", 2, 15, 0, 0, 0,"毒耐性");
+        AttackWeapon spire = new AttackWeapon("スピア", 15, 0, 0, 0, 0,"眠り耐性");
+        
+        FC.getAttackWeapon(sword);
+        FC.getDefenseWeapon(shield);
+        System.out.println(FC.AT + "→"+ FC.getAttack());
+        System.out.println(FC.DF + "→" + FC.getDefance());
+        FC.getAttackWeapon(spire);
+        System.out.println(FC.AT + "→" + FC.getAttack());
+
+        FC.displayWeapon();
 
 
     }   

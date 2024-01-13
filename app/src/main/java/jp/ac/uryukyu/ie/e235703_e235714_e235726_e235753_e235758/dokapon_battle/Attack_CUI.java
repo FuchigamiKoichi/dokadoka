@@ -2,7 +2,7 @@ package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 
 import java.util.Random;
 
-public abstract class Attack {
+public abstract class Attack_CUI {
     public abstract double Attack(FightCharacter execter, FightCharacter target);
 }
 /*------------------------------------------------------------------------------------------- */
@@ -10,7 +10,7 @@ public abstract class Attack {
  * Attack
  */
 
-class AttackComand extends Attack{
+class AttackComand extends Attack_CUI{
     double allAttack;
     @Override
     public double Attack(FightCharacter execter, FightCharacter target){
@@ -69,7 +69,7 @@ class AttackComand extends Attack{
 /**
  * Magical
  */
-class MagicalComand extends Attack{
+class MagicalComand extends Attack_CUI{
     double allAttack;
     int comand2;
     @Override
@@ -136,7 +136,7 @@ class MagicalComand extends Attack{
 /**
  * SpecialComand
  */
-class SpecialComand extends Attack{
+class SpecialComand extends Attack_CUI{
     double allAttack;
     FightCharacter player;
     FightCharacter enemy;
