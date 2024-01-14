@@ -7,11 +7,21 @@ public class User implements Comparable<User>{
     private int playerRanking;
     private double totalAssets;
     private Space point;
+    private FightCharacter fighter;
 
-    public User(String playerName,double totalAssets,Space point){
+    public User(String playerName,double totalAssets,Space point, FightCharacter fighter){
         this.playerName = playerName;
         this.totalAssets = totalAssets;
         this.point = point;
+        this.fighter = fighter;
+    }
+
+    public FightCharacter getFighter() {
+        return fighter;
+    }
+
+    public void setFighter(FightCharacter fighter) {
+        this.fighter = fighter;
     }
 
     public Space getSpace() {

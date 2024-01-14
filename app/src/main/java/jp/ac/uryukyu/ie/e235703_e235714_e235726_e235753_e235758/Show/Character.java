@@ -137,6 +137,9 @@ class MV extends JPanel{
         JButton walkCharacter = new JButton();
         JButton Shuffle = new JButton();
 
+        Battle battlePanel = new Battle(getUsers().get(getCuser()).getFighter(), new Zombie());
+        battlePanel.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+
         ActionListener upAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -158,6 +161,10 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
+                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        add(battlePanel);
+                        repaint();
+                    }
                     setCuser(getCuser() + 1);
                 }else{
                     add(walkCharacter);
@@ -192,6 +199,10 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
+                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        add(battlePanel);
+                        repaint();
+                    }
                     setCuser(getCuser() + 1);
                 }else{
                     add(walkCharacter);
@@ -226,6 +237,10 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
+                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        add(battlePanel);
+                        repaint();
+                    }
                     setCuser(getCuser() + 1);
                 }else{
                     add(walkCharacter);
@@ -260,6 +275,10 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
+                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        add(battlePanel);
+                        repaint();
+                    }
                     setCuser(getCuser() + 1);
                 }else{
                     add(walkCharacter);

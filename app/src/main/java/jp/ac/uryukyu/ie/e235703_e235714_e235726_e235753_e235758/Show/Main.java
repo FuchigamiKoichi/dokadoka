@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.*;
+//import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.*;
 import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.*;
 import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_sugoroku.*;;
 
@@ -92,13 +92,15 @@ public class Main extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(user < member){
-                User player = new User(userName.getText(), 2000, spaces.get(startSpace - 1));
+                FightCharacter job = new Warrior(userName.getText());
+                User player = new User(userName.getText(), job.getMoney(), spaces.get(startSpace - 1), job);
                 players.addUser(player);
                 user += 1;
                 userName.setText("");
                 character.setText("キャラクター"+String.valueOf(user)+"の名前を教えて！");
             }else{
-                User player = new User(userName.getText(), 2000, spaces.get(startSpace - 1));
+                FightCharacter job = new Warrior(userName.getText());
+                User player = new User(userName.getText(), job.getMoney(), spaces.get(startSpace - 1), job);
                 players.addUser(player);
                 userName.setText("");
                 character.setText("キャラクター"+String.valueOf(user)+"の名前を教えて！");

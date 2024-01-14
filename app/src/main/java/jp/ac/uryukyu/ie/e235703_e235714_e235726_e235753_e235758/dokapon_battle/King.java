@@ -1,4 +1,5 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
+
 //HPと状態異常を全回復させる機能を持つクラス
 public class King {
     //HPを全回復するメソッド
@@ -8,11 +9,8 @@ public class King {
     }
     
     
-    //HPの最大値を増やしていきたい
-    
-    
     public static void main(String[] args) {
-        FightCharacter FC = new FightCharacter("John", 0, 0, 0, 0, 100, "毒");
+        FightCharacter FC = new FightCharacter("John", 0, 0, 0, 0, 100,500, "毒");
         King king = new King();
         System.out.println("勇者" + FC.getName() + "よ!\n" + "よくぞ戻ったダバ");
         System.out.println("ガンバってるようダバ、" + "まずは、キズついた体を治してあげるダバ!");

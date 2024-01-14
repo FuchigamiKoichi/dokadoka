@@ -13,14 +13,5 @@ public class ZenyTake implements Action{
         target.setMoney(target.getMoney() - (int)stolenMoney);
         System.out.println(executer.getName() + "に" +  + (int)stolenMoney + "円奪われた");
         System.out.println(target.getName() + "の所持金は" + target.getMoney() + "円です");
-
     }
-    public static void main(String[] args) {
-        Warrior warrior1 = new Warrior("戦士", 0, 0, 0, 0, 0, 1000,"健康");
-        Enemy enemy = new Enemy("ローグ", 0, 0,0, 0, 0, 200,"通常");
-        ZenyTake zenyTake = new ZenyTake();
-        zenyTake.execute(enemy,warrior1);
-        
-    }
-    
 }
