@@ -11,13 +11,7 @@ public class Rogue extends Enemy{
         this.dead = true;
         System.out.println(this.getName() + "は倒された");
         System.out.println("経験値: " + obtainedEXP);
-        FightCharacter FC = new FightCharacter("ken", HP, SP, DF, AT, MP, health);
+        FightCharacter FC = new FightCharacter("ken", 10, 1, 2, 3, 1, 50, "健康");
         FC.gainEXP(obtainedEXP);
     }
-
-    public static void main(String[] args) {
-        Enemy rogue = new Rogue("ローグ", 0, 0, 0, 0, 0, 0,"健康");
-        rogue.EnemyDead();
-    }
-
 }
