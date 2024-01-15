@@ -21,18 +21,22 @@ class AppTest {
      * 　備考
      *  ＃(4) PvPは今の所想定していない
      *  ＃(5) とりあえず敵は"ローグ"とする。
+     *  ＃(6) プレイヤーの攻撃力はローグを即死させるほど高い
+     *  ＃(7)　ローグのHPはどんな攻撃でも即死するほど低い
+     *  ＃(8)　念の為何回か攻撃させる
      */
+    
     @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
-        FightCharacter demoPlayer = new FightCharacter("デモプレイヤー", 100, 100, 100, 100, 100, "デバックモード");
-        Enemy rogue = new Rogue("デモローグ", 1, 1, 1, 1, 1,1, "死にかけ");
+        int defaulPlayerAttack = 100;
+        int defaulRogueHP = 1; 
+        Character demoPlayer = new FightCharacter("デモプレイヤー", 100, 100, 100, defaulPlayerAttack, 100, "デバックモード");
+        Character demoRogue = new Rogue("デモローグ", defaulRogueHP, 1, 1, 1, 1,1, "死にかけ");
 
         //失敗が無いように5回ずつ攻撃させる
         for(int count= 0; count<5; count++){
-            demoPlayer.Attack
-
+            demoPlayer.execute(demoPlayer, demoRogue);
         }
+        assertEquals(defaulRogueHP - demoRogue.getHP());
+
     }
 }
-
