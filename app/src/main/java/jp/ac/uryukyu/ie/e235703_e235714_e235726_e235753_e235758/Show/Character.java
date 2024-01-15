@@ -136,10 +136,7 @@ class MV extends JPanel{
 
         JButton walkCharacter = new JButton();
         JButton Shuffle = new JButton();
-
-        Battle battlePanel = new Battle(getUsers().get(getCuser()).getFighter(), new Zombie());
-        battlePanel.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
-
+        
         ActionListener upAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -161,7 +158,58 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
-                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+
+                    boolean encount = false;
+                    FightCharacter fighter1 = new Zombie();
+                    FightCharacter fighter2 = new Zombie();
+
+                    for(User user : getUsers()){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                            encount = true;
+
+                            fighter1 = getUsers().get(getCuser()).getFighter();
+                            fighter2 = user.getFighter();
+                        }
+                    }
+
+                    if(encount){
+                        Pvp battlePanel = new Pvp(fighter1, fighter2);
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(battlePanel);
+                        repaint();
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
                     }
@@ -199,7 +247,58 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
-                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+
+                    boolean encount = false;
+                    FightCharacter fighter1 = new Zombie();
+                    FightCharacter fighter2 = new Zombie();
+
+                    for(User user : getUsers()){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                            encount = true;
+
+                            fighter1 = getUsers().get(getCuser()).getFighter();
+                            fighter2 = user.getFighter();
+                        }
+                    }
+
+                    if(encount){
+                        Pvp battlePanel = new Pvp(fighter1, fighter2);
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(battlePanel);
+                        repaint();
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
                     }
@@ -237,7 +336,58 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
-                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+
+                    boolean encount = false;
+                    FightCharacter fighter1 = new Zombie();
+                    FightCharacter fighter2 = new Zombie();
+
+                    for(User user : getUsers()){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                            encount = true;
+
+                            fighter1 = getUsers().get(getCuser()).getFighter();
+                            fighter2 = user.getFighter();
+                        }
+                    }
+
+                    if(encount){
+                        Pvp battlePanel = new Pvp(fighter1, fighter2);
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(battlePanel);
+                        repaint();
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
                     }
@@ -275,7 +425,58 @@ class MV extends JPanel{
                 if(getRandomNumber() - getWalk()== 0){
                     removeAll();
                     setWalk(0);
-                    if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+
+                    boolean encount = false;
+                    FightCharacter fighter1 = new Zombie();
+                    FightCharacter fighter2 = new Zombie();
+
+                    for(User user : getUsers()){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                            encount = true;
+
+                            fighter1 = getUsers().get(getCuser()).getFighter();
+                            fighter2 = user.getFighter();
+                        }
+                    }
+
+                    if(encount){
+                        Pvp battlePanel = new Pvp(fighter1, fighter2);
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(battlePanel);
+                        repaint();
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                        Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
+                        
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                if(battlePanel.getFinish()){
+                                    removeAll();
+                                    repaint();
+                                }
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
                     }

@@ -9,10 +9,13 @@ import java.util.Random;
 
 import javax.swing.*;
 
-public class Battle extends JPanel{
 
+public class Pvp extends JPanel{
     FightCharacter first;
     FightCharacter second;
+
+    static int WIDTH = Main.WIDTH/4 * 3;
+    static int HEIGHT = Main.HEIGHT/4 * 3;
 
     Font fm = new Font("ＭＳ ゴシック", Font.BOLD, 40);
 
@@ -52,16 +55,23 @@ public class Battle extends JPanel{
         this.second = second;
     }
 
-    Battle(FightCharacter first, Zombie second){
+    Pvp(FightCharacter first, FightCharacter second){
         setLayout(null);
+
+        setPreferredSize(new Dimension(Pvp.WIDTH, Pvp.HEIGHT));
 
         this.finish = false;
         this.first = first;
         this.second = second;
 
         AttackPanel atp = new AttackPanel();
-        atp.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+        atp.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
         add(atp);
+
+        JLabel show = new JLabel("PVPが起動中");
+        show.setFont(fm);
+        show.setBounds(Pvn.WIDTH/3 * 2, 200, Pvn.WIDTH, Pvn.HEIGHT);
+        atp.add(show);
     }
 
 
@@ -83,32 +93,32 @@ public class Battle extends JPanel{
 
             JButton attackButton = new JButton("攻撃");
             attackButton.setFont(fm);
-            attackButton.setBounds(Main.WIDTH/6 - 100, Main.HEIGHT - 110, 200, 100);
+            attackButton.setBounds(10, Pvp.HEIGHT - 110, 200, 100);
             add(attackButton);
 
             JButton magickButton = new JButton("魔法攻撃");
             magickButton.setFont(fm);
-            magickButton.setBounds((Main.WIDTH/6 * 2) - 100, Main.HEIGHT - 110, 200, 100);
+            magickButton.setBounds(220, Pvp.HEIGHT - 110, 200, 100);
             add(magickButton);
 
             JButton onepunchButton = new JButton("必殺攻撃");
             onepunchButton.setFont(fm);
-            onepunchButton.setBounds((Main.WIDTH/6 * 3) - 100, Main.HEIGHT - 110, 200, 100);
+            onepunchButton.setBounds(430, Pvp.HEIGHT - 110, 200, 100);
             add(onepunchButton);
 
             JButton buffButton = new JButton("バフ攻撃");
             buffButton.setFont(fm);
-            buffButton.setBounds(Main.WIDTH - 310, Main.HEIGHT - 110, 200, 100);
+            buffButton.setBounds(640, Pvp.HEIGHT - 110, 200, 100);
             add(buffButton);
 
             JLabel turn = new JLabel(first.getName()+"のターン");
-            turn.setBounds(0, 10, 1470, 500);
+            turn.setBounds(0, 10, Pvp.WIDTH, 500);
             turn.setFont(fm);
             add(turn);
 
             JLabel HP = new JLabel("相手のHPは"+String.valueOf(second.getHP())+"です");
             HP.setFont(fm);
-            HP.setBounds(0, 300, 1470, 500);
+            HP.setBounds(0, 300, Pvp.WIDTH, 500);
             add(HP);
 
             ActionListener attackAction = new ActionListener() {
@@ -116,8 +126,8 @@ public class Battle extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     setAttackerschoice(1);
                     defencePanel dp = new defencePanel();
-                    dp.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-                    setVisible(false);
+                    dp.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
+                    removeAll();
                     add(dp);
                     repaint();
                 }
@@ -129,8 +139,8 @@ public class Battle extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     setAttackerschoice(2);
                     defencePanel dp = new defencePanel();
-                    dp.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-                    setVisible(false);
+                    dp.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
+                    removeAll();
                     add(dp);
                     repaint();
                 }
@@ -142,8 +152,8 @@ public class Battle extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     setAttackerschoice(3);
                     defencePanel dp = new defencePanel();
-                    dp.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-                    setVisible(false);
+                    dp.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
+                    removeAll();
                     add(dp);
                     repaint();
                 }
@@ -155,8 +165,8 @@ public class Battle extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     getFirst().setAttack(getFirst().getAttack() * 2);
                     defencePanel dp = new defencePanel();
-                    dp.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-                    setVisible(false);
+                    dp.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
+                    removeAll();
                     add(dp);
                     repaint();
                 }
@@ -174,32 +184,32 @@ public class Battle extends JPanel{
 
             JButton defence = new JButton("防御");
             defence.setFont(fm);
-            defence.setBounds((Main.WIDTH/6 * 1) - 100, Main.HEIGHT - 110, 200, 100);
+            defence.setBounds(10, Pvp.HEIGHT - 110, 200, 100);
             add(defence);
 
             JButton magickDefence = new JButton("魔法防御");
             magickDefence.setFont(fm);
-            magickDefence.setBounds((Main.WIDTH/6 * 2) - 100, Main.HEIGHT - 110, 200, 100);
+            magickDefence.setBounds(220, Pvp.HEIGHT - 110, 200, 100);
             add(magickDefence);
 
             JButton surrender = new JButton("降参");
             surrender.setFont(fm);
-            surrender.setBounds((Main.WIDTH/6 * 3) - 100, Main.HEIGHT - 110, 200, 100);
+            surrender.setBounds(430, Pvp.HEIGHT - 110, 200, 100);
             add(surrender);
 
             JButton counter = new JButton("カウンター");
             counter.setFont(fm);
-            counter.setBounds((Main.WIDTH/6 * 4) - 100, Main.HEIGHT - 110, 200, 100);
+            counter.setBounds(640, Pvp.HEIGHT - 110, 200, 100);
             add(counter);
 
             JLabel turn = new JLabel(second.getName()+"のターン");
-            turn.setBounds(0, 10, 1470, 500);
+            turn.setBounds(0, 10, Pvp.WIDTH, 500);
             turn.setFont(fm);
             add(turn);
 
             JLabel HP = new JLabel("相手のHPは"+String.valueOf(first.getHP())+"です");
             HP.setFont(fm);
-            HP.setBounds(0, 300, 1470, 500);
+            HP.setBounds(0, 300, Pvp.WIDTH, 500);
             add(HP);
 
             ActionListener defenceAction = new ActionListener() {
@@ -208,20 +218,20 @@ public class Battle extends JPanel{
                     if(getAttackerschoice() == 1){
                         AttackComand atc = new AttackComand();
                         double damage = atc.Attack_method(first, second, 1);
-                        first.takenDamage(damage);
+                        second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -231,18 +241,18 @@ public class Battle extends JPanel{
                         double damage = mgc.Attack_method(first, second, 1);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -252,18 +262,18 @@ public class Battle extends JPanel{
                         double damage = spc.Attack_method(first, second, 1);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -277,24 +287,24 @@ public class Battle extends JPanel{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(getAttackerschoice() == 1){
-                        setVisible(false);
+                        removeAll();
 
                         AttackComand atc = new AttackComand();
                         double damage = atc.Attack_method(first, second, 2);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -304,18 +314,18 @@ public class Battle extends JPanel{
                         double damage = mgc.Attack_method(first, second, 2);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -325,18 +335,18 @@ public class Battle extends JPanel{
                         double damage = spc.Attack_method(first, second, 2);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -354,18 +364,18 @@ public class Battle extends JPanel{
                         double damage = atc.Attack_method(first, second, 3);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -375,18 +385,18 @@ public class Battle extends JPanel{
                         double damage = mgc.Attack_method(first, second, 3);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -396,18 +406,18 @@ public class Battle extends JPanel{
                         double damage = spc.Attack_method(first, second, 3);
                         second.takenDamage(damage);
                         if(second.getDead()){
-                            setVisible(false);
+                            removeAll();
 
                             Win win = new Win();
-                            win.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+                            win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
 
                             repaint();
                         }else{
-                            setVisible(false);
+                            removeAll();
 
                             AttackPanel atp = new AttackPanel();
-                            atp.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
+                            atp.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
                             add(atp);
 
                             repaint();
@@ -606,30 +616,21 @@ public class Battle extends JPanel{
     class Win extends JPanel{
         Win(){
             setLayout(null);
-
-            JButton map = new JButton("マップに戻る");
-            map.setBounds(0,Main.HEIGHT-200, Main.WIDTH, 200);
-            map.setFont(fm);
-            add(map);
-
-            ActionListener returnAction = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setFinish(true);
-
-                    setVisible(false);
-
-                    repaint();
-                }
-            };
-            map.addActionListener(returnAction);
-
+            setFinish(true);
+            
             JLabel winner = new JLabel();
             winner.setFont(fm);
-            winner.setBounds(100, 10, 1300, 300);
-            winner.setText(first.getName()+"が勝利しました！　"+first.getName()+"は"+second.getName()+"から"+(int) second.getMoney()/10+"円をもらいます！");
+            winner.setBounds(0, 10, Pvp.WIDTH, 300);
+            winner.setText(first.getName()+"が勝利しました！");
+
+            JLabel get = new JLabel();
+            get.setFont(fm);
+            get.setBounds(0,200, Pvp.WIDTH, 300);
+            get.setText(first.getName()+"は"+second.getName()+"から"+(int) second.getMoney()/10+"円をもらいます！");
+
             first.setMoney(first.getMoney() + ((int) second.getMoney()/10));
             add(winner);
+            add(get);
         }
     }
 }

@@ -18,6 +18,7 @@ public class Sugo extends JPanel{
     public Sugo(){
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setOpaque(false);
+        setLayout(null);
     }
 
     //描画処理

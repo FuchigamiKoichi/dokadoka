@@ -61,8 +61,6 @@ public class Main extends JFrame{
 
     //すごろく画面
     Sugo map = new Sugo();
-    map.setLayout(null);
-
     MV move = new MV(world);
     move.setLayout(null);
     move.setBounds(0,0,Main.WIDTH,Main.HEIGHT);
