@@ -4,10 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Result extends JPanel{
-    int w; //文字数
-    int WIDTH = Main.WIDTH;
-    int HEIGHT = Main.HEIGHT;
-    Font fm = new Font("Serif" , Font.PLAIN , 40); //フォント設定
+    private int w; //文字数
+    private int WIDTH = Main.WIDTH;
+    private int HEIGHT = Main.HEIGHT;
+    private Font fm = new Font("Serif" , Font.PLAIN , 40); //フォント設定
 
     //コンストラクタ（初期化処理）
     public Result(){

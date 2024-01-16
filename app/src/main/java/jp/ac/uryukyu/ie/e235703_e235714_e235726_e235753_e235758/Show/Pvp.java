@@ -11,17 +11,17 @@ import javax.swing.*;
 
 
 public class Pvp extends JPanel{
-    FightCharacter first;
-    FightCharacter second;
-
+    private FightCharacter first;
+    private FightCharacter second;
+    
     static int WIDTH = Main.WIDTH/4 * 3;
     static int HEIGHT = Main.HEIGHT/4 * 3;
 
-    Font fm = new Font("ＭＳ ゴシック", Font.BOLD, 40);
+    private Font fm = new Font("ＭＳ ゴシック", Font.BOLD, 40);
 
-    boolean finish;
+    private boolean finish;
 
-    int attackerschoice;
+    private int attackerschoice;
 
     public void setFinish(boolean finish) {
         this.finish = finish;

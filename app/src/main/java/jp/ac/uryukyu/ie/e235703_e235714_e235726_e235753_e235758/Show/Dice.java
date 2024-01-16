@@ -127,11 +127,6 @@ class Dice6 extends JPanel{
 }
 
 class TurnShow extends JPanel{
-    int w; //文字数
-    int WIDTH = Main.WIDTH;
-    int HEIGHT = Main.HEIGHT;
-    Font fm = new Font("Serif" , Font.PLAIN , 40); //フォント設定
-
     public TurnShow(){
         setPreferredSize(new Dimension(400, 200));
         setLayout(null);

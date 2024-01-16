@@ -7,12 +7,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Sugo extends JPanel{
-    int w; //文字数
-    int member;
-    int user = 1;
-    int WIDTH = Main.WIDTH;
-    int HEIGHT = Main.HEIGHT;
-    Font fm = new Font("Serif" , Font.PLAIN , 40); //フォント設定
+    private int WIDTH = Main.WIDTH;
+    private int HEIGHT = Main.HEIGHT;
 
     //コンストラクタ（初期化処理）
     public Sugo(){

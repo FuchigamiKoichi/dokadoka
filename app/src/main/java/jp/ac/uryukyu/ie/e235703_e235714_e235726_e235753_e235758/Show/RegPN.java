@@ -6,15 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class RegPN extends JPanel{
-    int w; //文字数
-    int member = Main.member;
-    int WIDTH = Main.WIDTH;
-    int HEIGHT = Main.HEIGHT;
-    Font fm = new Font("Serif" , Font.PLAIN , 40); //フォント設定
+    private int w; //文字数
+    private int member = Main.member;
+    private int WIDTH = Main.WIDTH;
+    private int HEIGHT = Main.HEIGHT;
+    private Font fm = new Font("Serif" , Font.PLAIN , 40); //フォント設定
 
     //コンストラクタ（初期化処理）
     public RegPN(){
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    }
+
+    public int getMember() {
+        return member;
     }
 
     //描画処理

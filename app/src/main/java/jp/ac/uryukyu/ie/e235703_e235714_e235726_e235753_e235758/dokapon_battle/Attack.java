@@ -2,7 +2,6 @@ package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 
 import java.util.Random;
 
-
 public interface Attack {
     public abstract double Attack_method(FightCharacter execter, FightCharacter target,int command2);
 }
