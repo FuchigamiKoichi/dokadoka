@@ -12,11 +12,12 @@ public abstract class Attack {
 
 class AttackComand extends Attack{
     double allAttack;
+    int comand2;
     @Override
     public double Attack(FightCharacter execter, FightCharacter target){
         //呼び出し時；attackComand(勇者, スライム)
         ComandSelect CS = new ComandSelect();
-        int comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
+        comand2 = CS.D_comand_Select(target);//相手のコマンドが入力される
         if(comand2 == 4){
             System.out.println("降参しました");
             System.out.println(target.getName() + "の負け!!");
@@ -61,6 +62,9 @@ class AttackComand extends Attack{
         return number;
     }
 
+    public int getComand2_アタッククラス(){
+        return comand2;
+    }
 }
 
 /*------------------------------------------------------------------------------------------- */
@@ -127,6 +131,10 @@ class MagicalComand extends Attack{
         int number = random.nextInt(11) + 95;
         number = number*1/100;
         return number;
+    }
+
+    public int getComand2_アタッククラス(){
+        return comand2;
     }
 }
 

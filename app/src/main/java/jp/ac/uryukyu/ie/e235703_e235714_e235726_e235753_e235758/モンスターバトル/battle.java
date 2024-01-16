@@ -69,7 +69,7 @@ public class battle {
                     System.out.println(p2.getName()+"は"+p1.getName()+"に"+ (int)Math.ceil(allAttack_先攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p1.getName() + "の残りHP: " + (int)ToNatureNum(p1.getHP()));
-                    System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n");
+                    System.out.println("\n"+"\n"+"\n"+"\n");
                 }
 
                 if(p1.getHP() <= 0){
@@ -91,7 +91,7 @@ public class battle {
                     System.out.println(p2.getName()+"は"+p1.getName()+"に" + (int)Math.ceil(allAttack_後攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p1.getName()+"の残りHP: " + (int)ToNatureNum(p1.getHP()));//自分がダメージ食らったから自分のhp表示
-                    System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n");
+                    System.out.println("\n"+"\n"+"\n"+"\n");
                     if(p1.getHP() <= 0){
                         p1.die();
                         System.out.println(p2.getName() + "の勝ち!!");
@@ -101,7 +101,7 @@ public class battle {
                     System.out.println(p1.getName()+"は"+p2.getName()+"に" + (int)Math.ceil(allAttack_後攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p2.getName()+"の残りHP: " + (int)ToNatureNum(p2.getHP()));
-                    System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n");
+                    System.out.println("\n"+"\n"+"\n"+"\n");
                 }
 
                 if(p2.getHP() <= 0){
@@ -133,7 +133,7 @@ public class battle {
                     System.out.println(p1.getName()+"は"+p2.getName()+"に" + (int)Math.ceil(allAttack_先攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p2.getName()+"の残りHP: " + (int)ToNatureNum(p2.getHP()));
-                    System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n");
+                    System.out.println("\n"+"\n"+"\n"+"\n");
                 }
 
                 if(p2.getHP() <= 0){
@@ -156,7 +156,7 @@ public class battle {
                     System.out.println(p1.getName()+"は"+p2.getName()+"に"+ (int)Math.ceil(allAttack_後攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p2.getName() + "の残りHP: " + (int)ToNatureNum(p2.getHP()));//自分がダメージ食らったから自分のhp表示
-                    System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n");
+                    System.out.println("\n"+"\n"+"\n"+"\n");
                     if(p2.getHP() <= 0){
                         p2.die();
                         System.out.println(p1.getName() + "の勝ち!!");
@@ -167,7 +167,7 @@ public class battle {
                     System.out.println(p2.getName()+"は"+p1.getName()+"に"+ (int)Math.ceil(allAttack_後攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p1.getName() + "の残りHP: " + (int)ToNatureNum(p1.getHP()));
-                    System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n");
+                    System.out.println("\n"+"\n"+"\n"+"\n");
                 }
 
                 if(p1.getHP() <= 0){

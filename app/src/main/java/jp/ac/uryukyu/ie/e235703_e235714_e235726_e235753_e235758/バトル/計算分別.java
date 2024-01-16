@@ -8,10 +8,12 @@ public class 計算分別 {
          if(comand1 == 1){ //こうげきクラス
             AttackComand AC = new AttackComand();
             allAttack = AC.Attack(execter, target);
+            //comand2 = AC.getComand2_アタッククラス();
          }
          if(comand1 == 2){
             MagicalComand MC = new MagicalComand();
             allAttack = MC.Attack(execter, target);
+            //comand2 = MC.getComand2_アタッククラス();
          }
          if(comand1 == 3){
             SpecialComand specal = new SpecialComand();

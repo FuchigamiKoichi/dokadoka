@@ -29,13 +29,13 @@ public class battle {
         ComandSelect comandSelect = new ComandSelect();
         計算分別 計算分別 = new 計算分別();
         
-        
-        計算分別.getComand2_アタッククラス_計算分別();
+        int comand2;
+        comand2 = 計算分別.getComand2_アタッククラス_計算分別();
 
         /*-------------------------------------------------------------------------------------------------- */
 
         int randomValue = new Random().nextInt(2);
-        FightCharacter 先行の人 = characters.get(randomValue);
+        FightCharacter 先行の人 = characters.get(randomValue);//!
         
         while(p1.getHP() > 0){
             //p2が先行の場合
@@ -47,12 +47,13 @@ public class battle {
                 double allAttack_先攻 = 計算分別.Calculation(comand1_先攻,p2,p1);
 
                 //自分が必殺の時、相手がカウンターか判断。その場合、自分のダメージくらう
-                if(計算分別.getComand2_アタッククラス_計算分別() == 3){
+                if(comand2 == 3){
                     System.out.println("カウンターされてしまった！！");
                     System.out.println(p1.getName()+"は"+p2.getName()+"に"+ (int)Math.ceil(allAttack_先攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p2.getName() + "の残りHP: " + (int)ToNatureNum(p2.getHP()));//自分がダメージ食らったから自分のhp表示
                     System.out.println();
+                    comand2 = 0;//リセット
                     if(p2.getHP() <= 0){
                         p2.die();
                         System.out.println(p1.getName() + "の勝ち!!");
@@ -143,12 +144,13 @@ public class battle {
                 double allAttack_後攻 = 計算分別.Calculation(comand1_後攻,p2/*攻撃する人*/,p1);
 
                 //自分が必殺の時、相手がカウンターか判断。その場合、自分のダメージくらう
-                if(計算分別.getComand2_アタッククラス_計算分別() == 3){
+                if(comand2 == 3){
                     System.out.println("カウンターされてしまった！！");
                     System.out.println(p1.getName()+"は"+p2.getName()+"に"+ (int)Math.ceil(allAttack_後攻) +"ダメージ！！！");
                     System.out.println();
                     System.out.println(p2.getName() + "の残りHP: " + (int)ToNatureNum(p2.getHP()));//自分がダメージ食らったから自分のhp表示
                     System.out.println();
+                    comand2 = 0;//リセット
                     if(p2.getHP() <= 0){
                         p2.die();
                         System.out.println(p1.getName() + "の勝ち!!");
