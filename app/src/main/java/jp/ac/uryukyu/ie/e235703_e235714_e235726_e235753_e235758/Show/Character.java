@@ -16,7 +16,13 @@ import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_sugoroku
 import javax.imageio.ImageIO;
 
 class Test extends JPanel{
-    Test(){
+    int width;
+    int height;
+    String job;
+    Test(String job, int width, int height){
+        this.width = width;
+        this.height = height;
+        this.job = job;
         setPreferredSize(new Dimension(400,400));
         setOpaque(false);
     }
@@ -24,7 +30,7 @@ class Test extends JPanel{
     public void paintComponent(Graphics g){
         BufferedImage imgTest = null;
         Graphics2D g2 = (Graphics2D) g;
-        String pathTest = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/Test.png";
+        String pathTest = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/"+job+".png";
 
         try {
             imgTest = ImageIO.read(new File(pathTest));
@@ -32,7 +38,7 @@ class Test extends JPanel{
             e.printStackTrace();
             imgTest = null;
         }
-        g2.drawImage(imgTest, 0,0, 50,100, this);
+        g2.drawImage(imgTest, 0,0, this.width, this.height, this);
     }
 }
 
@@ -150,7 +156,14 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test();
+                    Test test = new Test("warrior", 50, 100);
+                    if(u.getFighter() instanceof Warrior){
+                        test = new Test("warrior", 50, 100);
+                    }else if(u.getFighter() instanceof Magician){
+                        test = new Test("magician",50 , 100);
+                    }else if(u.getFighter() instanceof Thief){
+                        test = new Test("thief", 50, 100);
+                    }
                     test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
                     add(test);
                 }
@@ -235,11 +248,18 @@ class MV extends JPanel{
                 way = world.getSpaces().get((getCpoint() + 15) - 1); //行き先(現在地の一マス上方)のspaceをとってくる
                 getUsers().get(getCuser()).setSpace(way);            //キャラクターの現在地を行き先に上書き
 
-                //ユーザーの再表示
+                 //ユーザーの再表示
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test();
+                    Test test = new Test("warrior", 50, 100);
+                    if(u.getFighter() instanceof Warrior){
+                        test = new Test("warrior", 50, 100);
+                    }else if(u.getFighter() instanceof Magician){
+                        test = new Test("magician", 50, 100);
+                    }else if(u.getFighter() instanceof Thief){
+                        test = new Test("thief", 50, 100);
+                    }
                     test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
                     add(test);
                 }
@@ -328,7 +348,14 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test();
+                    Test test = new Test("warrior", 50, 100);
+                    if(u.getFighter() instanceof Warrior){
+                        test = new Test("warrior", 50, 100);
+                    }else if(u.getFighter() instanceof Magician){
+                        test = new Test("magician", 50, 100);
+                    }else if(u.getFighter() instanceof Thief){
+                        test = new Test("thief", 50, 100);
+                    }
                     test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
                     add(test);
                 }
@@ -417,7 +444,14 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test();
+                    Test test = new Test("warrior", 50, 100);
+                    if(u.getFighter() instanceof Warrior){
+                        test = new Test("warrior", 50, 100);
+                    }else if(u.getFighter() instanceof Magician){
+                        test = new Test("magician", 50, 100);
+                    }else if(u.getFighter() instanceof Thief){
+                        test = new Test("thief", 50, 100);
+                    }
                     test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
                     add(test);
                 }
@@ -508,7 +542,14 @@ class MV extends JPanel{
                 bt.add(turn);
 
                 for (User u : getUsers()){
-                    Test test = new Test();
+                    Test test = new Test("warrior", 50, 100);
+                    if(u.getFighter() instanceof Warrior){
+                        test = new Test("warrior", 50, 100);
+                    }else if(u.getFighter() instanceof Magician){
+                        test = new Test("magician",50, 100);
+                    }else if(u.getFighter() instanceof Thief){
+                        test = new Test("thief", 50, 100);
+                    }
                     test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
                     bt.add(test);
                 }

@@ -7,17 +7,4 @@ public class King {
         FC.setHP(FC.defaultHP + FC.gainHP);
         FC.health = "健康";
     }
-    
-    
-    public static void main(String[] args) {
-        FightCharacter FC = new FightCharacter("John", 0, 0, 0, 0, 100,500, "毒");
-        King king = new King();
-        System.out.println("勇者" + FC.getName() + "よ!\n" + "よくぞ戻ったダバ");
-        System.out.println("ガンバってるようダバ、" + "まずは、キズついた体を治してあげるダバ!");
-        
-        king.recover(FC);
-    
-        System.out.println("キズついた体はきれいに治ったダバ");
-        System.out.println( "HP(" + FC.getName() + "): " + FC.HP + "\n健康状態: " + FC.health);
-    }
 }
