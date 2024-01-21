@@ -18,12 +18,9 @@ public class ItemShop extends JPanel {
     private void initializeUI() {
         // アイテムリストのモデルを作成し、いくつかのアイテムを追加
         itemListModel = new DefaultListModel<>();
-        itemListModel.addElement(new Item("高級な盾 防御力50", 1000, 50));
-        itemListModel.addElement(new Item("普通な盾 防御力30", 500, 30));
-        itemListModel.addElement(new Item("ボロい盾 防御力10", 100, 10));
-        itemListModel.addElement(new Item("高級な剣 攻撃力50", 1000, 50));
-        itemListModel.addElement(new Item("普通な剣 攻撃力30", 500, 30));
-        itemListModel.addElement(new Item("ボロい剣 攻撃力10", 100, 10));
+        itemListModel.addElement(new Item("悪口 ５０ダメージ", 1000, 50));
+        itemListModel.addElement(new Item("イタズラ ３０ダメージ", 500, 30));
+        itemListModel.addElement(new Item("弄り １０ダメージ", 100, 10));
 
         // JListを作成し、スクロール可能にする
         itemList = new JList<>(itemListModel);
@@ -52,7 +49,7 @@ public class ItemShop extends JPanel {
             Item selectedItem = itemListModel.getElementAt(selectedIndex);
             // ここでアイテムの価格を取得し、ポイントを減らすなどの処理を追加することができます
             JOptionPane.showMessageDialog(this, selectedItem.getName() + " を購入しました！\n" +
-                    "ステータス: " + selectedItem.getStatus());
+                    "ステータス: " + selectedItem.getdamage());
         } else {
             JOptionPane.showMessageDialog(this, "アイテムを選択してください。");
         }
@@ -62,12 +59,12 @@ public class ItemShop extends JPanel {
     private static class Item {
         private String name;
         private int price;
-        private int status;
+        private int damage;
 
-        public Item(String name, int price, int status) {
+        public Item(String name, int price, int damage) {
             this.name = name;
             this.price = price;
-            this.status = status;
+            this.damage = damage;
         }
 
         public String getName() {
@@ -78,14 +75,15 @@ public class ItemShop extends JPanel {
             return price;
         }
 
-        public int getStatus() {
-            return status;
+        public int getdamage() {
+            return damage;
         }
 
         @Override
         public String toString() {
             return name + " - " + price + "円";
         }
+
     }
 
     // じゃんけんゲームと関連するメソッド
