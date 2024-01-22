@@ -142,6 +142,7 @@ class MV extends JPanel{
 
         JButton walkCharacter = new JButton();
         JButton Shuffle = new JButton();
+        JButton ranking = new JButton();
         
         ActionListener upAction = new ActionListener() {
             @Override
@@ -755,6 +756,30 @@ class MV extends JPanel{
         walkCharacter.setText("歩く！");
         walkCharacter.addActionListener(walk);
 
+        ActionListener rankingshow = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RankingShow ranking = new RankingShow(getUsers());
+
+                JButton back = new JButton("マップに戻る");
+                back.setFont(fm);
+                back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                add(back);
+                ActionListener backAction = new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        removeAll();
+                        repaint();
+                    };
+                };
+                back.addActionListener(backAction);
+
+                ranking.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                add(ranking);
+                repaint();
+            }
+        };
+        ranking.addActionListener(rankingshow);
+
         ActionListener shuffleAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -869,6 +894,11 @@ class MV extends JPanel{
             }
         };
         Shuffle.addActionListener(shuffleAction);
+
+        ranking.setBounds(Main.WIDTH - 200, Main.HEIGHT - 50, 200, 50);
+        ranking.setFont(fm);
+        ranking.setText("順位を確認");
+        add(ranking);
 
         Shuffle.setBounds(0, Main.HEIGHT - 70, 300, 70);
         Shuffle.setFont(fm);

@@ -65,9 +65,6 @@ public class Main extends JFrame{
         }
     }
 
-    //結果画面
-    //Result result = new Result();
-
     //すごろく画面
     Sugo map = new Sugo();
     MV move = new MV(world);

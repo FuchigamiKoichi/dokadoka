@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class RankingManager {
-    private ArrayList<User> Users;
-
-    public String getRanking(){
+    public String getRanking(ArrayList<User> Users){
         //ランキングを取得する処理
         ArrayList<User> sortedUsers = new ArrayList<>(Users);
         Collections.sort(sortedUsers);
