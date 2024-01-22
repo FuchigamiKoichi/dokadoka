@@ -222,6 +222,8 @@ public class Pvp extends JPanel{
                         if(second.getDead()){
                             removeAll();
 
+                            second.setHealth("死亡");
+
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
@@ -243,6 +245,8 @@ public class Pvp extends JPanel{
                         if(second.getDead()){
                             removeAll();
 
+                            second.setHealth("死亡");
+
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
@@ -263,6 +267,8 @@ public class Pvp extends JPanel{
                         second.takenDamage(damage);
                         if(second.getDead()){
                             removeAll();
+
+                            second.setHealth("死亡");
 
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
@@ -295,6 +301,8 @@ public class Pvp extends JPanel{
                         if(second.getDead()){
                             removeAll();
 
+                            second.setHealth("死亡");
+
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
@@ -315,6 +323,8 @@ public class Pvp extends JPanel{
                         second.takenDamage(damage);
                         if(second.getDead()){
                             removeAll();
+
+                            second.setHealth("死亡");
 
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
@@ -337,6 +347,8 @@ public class Pvp extends JPanel{
                         if(second.getDead()){
                             removeAll();
 
+                            second.setHealth("死亡");
+
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
@@ -356,6 +368,20 @@ public class Pvp extends JPanel{
             };
             magickDefence.addActionListener(magickAction);
 
+            ActionListener surrenderAction = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    removeAll();
+
+                    Win win = new Win();
+                    win.setBounds(0,0,Pvp.WIDTH,Pvp.HEIGHT);
+                    add(win);
+
+                    repaint();
+                }
+            };
+            surrender.addActionListener(surrenderAction);
+
             ActionListener counterAction = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -365,6 +391,8 @@ public class Pvp extends JPanel{
                         second.takenDamage(damage);
                         if(second.getDead()){
                             removeAll();
+
+                            second.setHealth("死亡");
 
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
@@ -387,6 +415,8 @@ public class Pvp extends JPanel{
                         if(second.getDead()){
                             removeAll();
 
+                            second.setHealth("死亡");
+
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);
                             add(win);
@@ -407,6 +437,8 @@ public class Pvp extends JPanel{
                         second.takenDamage(damage);
                         if(second.getDead()){
                             removeAll();
+
+                            second.setHealth("死亡");
 
                             Win win = new Win();
                             win.setBounds(0, 0, Pvp.WIDTH, Pvp.HEIGHT);

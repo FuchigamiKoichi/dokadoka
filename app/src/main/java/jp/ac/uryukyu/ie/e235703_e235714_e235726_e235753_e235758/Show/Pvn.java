@@ -67,11 +67,6 @@ public class Pvn extends JPanel{
         PlayerPanel pp = new PlayerPanel();
         pp.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
         add(pp);
-
-        JLabel show = new JLabel("PVNが起動中");
-        show.setFont(fm);
-        show.setBounds(Pvn.WIDTH/3 * 2, 200, Pvn.WIDTH, Pvn.HEIGHT);
-        pp.add(show);
     }
 
 
@@ -120,25 +115,39 @@ public class Pvn extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         setenemyschoice();
-                        AttackComand atc = new AttackComand();
-                        double damage = atc.Attack_method(player, enemy, getenemyschoice());
-                        enemy.takenDamage(damage);
-                        if(enemy.getDead()){
-                            removeAll();
+                        if(getenemyschoice() != 4){
+                            AttackComand atc = new AttackComand();
+                            double damage = atc.Attack_method(player, enemy, getenemyschoice());
+                            enemy.takenDamage(damage);
+                            if(enemy.getDead()){
+                                removeAll();
 
+                                Win win = new Win(player,enemy);
+                                win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
+                                add(win);
+
+                                repaint();
+                            }else{
+                                removeAll();
+
+                                PlayerPanel pp = new PlayerPanel();
+                                pp.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
+                                add(pp);
+
+                                repaint();
+                            }
+                        }else{
                             Win win = new Win(player,enemy);
                             win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                             add(win);
 
-                            repaint();
-                        }else{
-                            removeAll();
-
-                            PlayerPanel pp = new PlayerPanel();
-                            pp.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
-                            add(pp);
+                            JLabel report = new JLabel("相手が降参しました");
+                            report.setFont(fm);
+                            report.setBounds(100,100,500,100);
+                            win.add(report);
 
                             repaint();
+
                         }
                     }
                 };
@@ -148,23 +157,36 @@ public class Pvn extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         setenemyschoice();
-                        MagicalComand mc = new MagicalComand();
-                        double damage = mc.Attack_method(player, enemy, getenemyschoice());
-                        enemy.takenDamage(damage);
-                        if(enemy.getDead()){
-                            removeAll();
+                        if(getenemyschoice() != 4){
+                            MagicalComand mc = new MagicalComand();
+                            double damage = mc.Attack_method(player, enemy, getenemyschoice());
+                            enemy.takenDamage(damage);
+                            if(enemy.getDead()){
+                                removeAll();
 
+                                Win win = new Win(player,enemy);
+                                win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
+                                add(win);
+
+                                repaint();
+                            }else{
+                                removeAll();
+
+                                PlayerPanel pp = new PlayerPanel();
+                                pp.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
+                                add(pp);
+
+                                repaint();
+                            }
+                        }else{
                             Win win = new Win(player,enemy);
                             win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                             add(win);
 
-                            repaint();
-                        }else{
-                            removeAll();
-
-                            PlayerPanel pp = new PlayerPanel();
-                            pp.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
-                            add(pp);
+                            JLabel report = new JLabel("相手が降参しました");
+                            report.setFont(fm);
+                            report.setBounds(100,100,500,100);
+                            win.add(report);
 
                             repaint();
                         }
@@ -176,23 +198,36 @@ public class Pvn extends JPanel{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         setenemyschoice();
-                        SpecialComand spc = new SpecialComand();
-                        double damage = spc.Attack_method(player, enemy, getenemyschoice());
-                        enemy.takenDamage(damage);
-                        if(enemy.getDead()){
-                            removeAll();
+                        if(getenemyschoice() != 4){
+                            SpecialComand spc = new SpecialComand();
+                            double damage = spc.Attack_method(player, enemy, getenemyschoice());
+                            enemy.takenDamage(damage);
+                            if(enemy.getDead()){
+                                removeAll();
 
-                            Win win = new Win(player, enemy);
+                                Win win = new Win(player, enemy);
+                                win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
+                                add(win);
+
+                                repaint();
+                            }else{
+                                removeAll();
+
+                                PlayerPanel pp = new PlayerPanel();
+                                pp.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
+                                add(pp);
+
+                                repaint();
+                            }
+                        }else{
+                            Win win = new Win(player,enemy);
                             win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                             add(win);
 
-                            repaint();
-                        }else{
-                            removeAll();
-
-                            PlayerPanel pp = new PlayerPanel();
-                            pp.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
-                            add(pp);
+                            JLabel report = new JLabel("相手が降参しました");
+                            report.setFont(fm);
+                            report.setBounds(100,100,500,100);
+                            win.add(report);
 
                             repaint();
                         }
@@ -257,6 +292,8 @@ public class Pvn extends JPanel{
                             if(player.getDead()){
                                 removeAll();
 
+                                player.setHealth("死亡");
+
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                                 add(win);
@@ -278,6 +315,8 @@ public class Pvn extends JPanel{
                             if(player.getDead()){
                                 removeAll();
 
+                                player.setHealth("死亡");
+
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                                 add(win);
@@ -298,6 +337,8 @@ public class Pvn extends JPanel{
                             player.takenDamage(damage);
                             if(player.getDead()){
                                 removeAll();
+
+                                player.setHealth("死亡");
 
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
@@ -330,6 +371,8 @@ public class Pvn extends JPanel{
                             if(player.getDead()){
                                 removeAll();
 
+                                player.setHealth("死亡");
+
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                                 add(win);
@@ -350,6 +393,8 @@ public class Pvn extends JPanel{
                             player.takenDamage(damage);
                             if(player.getDead()){
                                 removeAll();
+
+                                player.setHealth("死亡");
 
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
@@ -372,6 +417,8 @@ public class Pvn extends JPanel{
                             if(player.getDead()){
                                 removeAll();
 
+                                player.setHealth("死亡");
+
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                                 add(win);
@@ -391,6 +438,20 @@ public class Pvn extends JPanel{
                 };
                 magickDefence.addActionListener(magickAction);
 
+                ActionListener surrenderAction = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        removeAll();
+
+                        Win win = new Win(enemy, player);
+                        win.setBounds(0,0,Pvn.WIDTH,Pvn.HEIGHT);
+                        add(win);
+
+                        repaint();
+                    }
+                };
+                surrender.addActionListener(surrenderAction);
+
                 ActionListener counterAction = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -400,6 +461,8 @@ public class Pvn extends JPanel{
                             player.takenDamage(damage);
                             if(player.getDead()){
                                 removeAll();
+
+                                player.setHealth("死亡");
 
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
@@ -422,6 +485,8 @@ public class Pvn extends JPanel{
                             if(player.getDead()){
                                 removeAll();
 
+                                player.setHealth("死亡");
+
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);
                                 add(win);
@@ -442,6 +507,8 @@ public class Pvn extends JPanel{
                             player.takenDamage(damage);
                             if(player.getDead()){
                                 removeAll();
+
+                                player.setHealth("死亡");
 
                                 Win win = new Win(enemy, player);
                                 win.setBounds(0, 0, Pvn.WIDTH, Pvn.HEIGHT);

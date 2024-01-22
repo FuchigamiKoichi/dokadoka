@@ -51,8 +51,8 @@ public class Main extends JFrame{
     //画面の生成
     Main frame = new Main();
     frame.setTitle("どかどかゲーム");
-    GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    device.setFullScreenWindow(frame);  //フルスクリーン設定
+    //GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    //device.setFullScreenWindow(frame);  //フルスクリーン設定
     frame.setBounds(0, 0, WIDTH, HEIGHT);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
@@ -120,9 +120,9 @@ public class Main extends JFrame{
         public void actionPerformed(ActionEvent e) {
             jobPanel.removeAll();
 
-            Test test = new Test("warrior", 400, 700);
-            test.setBounds(0,0,400,800);
-            jobPanel.add(test);
+            ShowP ShowP = new ShowP("warrior", 400, 700);
+            ShowP.setBounds(0,0,400,800);
+            jobPanel.add(ShowP);
 
             j.setJob(new Warrior(userName.getText()));
 
@@ -136,9 +136,9 @@ public class Main extends JFrame{
         public void actionPerformed(ActionEvent e) {
             jobPanel.removeAll();
 
-            Test test = new Test("magician", 400, 700);
-            test.setBounds(0,0,400,800);
-            jobPanel.add(test);
+            ShowP ShowP = new ShowP("magician", 400, 700);
+            ShowP.setBounds(0,0,400,800);
+            jobPanel.add(ShowP);
 
             j.setJob(new Magician(userName.getText()));
 
@@ -152,9 +152,9 @@ public class Main extends JFrame{
         public void actionPerformed(ActionEvent e) {
             jobPanel.removeAll();
 
-            Test test = new Test("thief", 400, 700);
-            test.setBounds(0,0,400,800);
-            jobPanel.add(test);
+            ShowP ShowP = new ShowP("thief", 400, 700);
+            ShowP.setBounds(0,0,400,800);
+            jobPanel.add(ShowP);
 
             j.setJob(new Thief(userName.getText()));
 
