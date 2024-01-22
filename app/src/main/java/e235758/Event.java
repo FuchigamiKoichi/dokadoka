@@ -1,6 +1,6 @@
 package e235758;
 
-
+import jp.ac.uryukyu.ie.e235703_e235714_e35726_e235753_e235758.dokapon_battle.*;
 import java.util.ArrayList;
 import java.util.Random;;
 public class Event {

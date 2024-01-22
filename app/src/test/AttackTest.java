@@ -1,7 +1,7 @@
-package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 import org.junit.jupiter.api.Test;
-import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle.*;
-class EnemyTest{
+import java.dokapon_battle.*;
+public class AttackTest {
+
     /**
      * 倒れたはずの敵は攻撃できないことを検証。
      * 検証手順
@@ -14,12 +14,18 @@ class EnemyTest{
      *  ＃(4) PvPは今の所想定していない
      *  ＃(5) とりあえず敵は"ローグ"とする。
      */
-    @Test
+    
+    @Test void appHasAGreeting() {
+        int defaulPlayerAttack = 100;
+        int defaulRogueHP = 1; 
+        Character demoPlayer = new FightCharacter("デモプレイヤー", 100, 100, 100, defaulPlayerAttack, 100, "デバックモード");
+        Character demoRogue = new Rogue("デモローグ", defaulRogueHP, 1, 1, 1, 1,1, "死にかけ");
 
-    void AttackTest(){
-        FightCharacter demoPlayer = new FightCharacter
-        Enemy rogue = new Rogue("ローグ", 1, 1, 1, 1, 1, 1,"健康");
-        demoPlayer.a
+        //失敗が無いように5回ずつ攻撃させる
+        for(int count= 0; count<5; count++){
+            demoPlayer.execute(demoPlayer, demoRogue);
+        }
+        assertEquals(defaulRogueHP - demoRogue.getHP());
 
     }
 }
