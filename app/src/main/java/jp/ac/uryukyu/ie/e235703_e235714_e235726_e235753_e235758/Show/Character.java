@@ -15,11 +15,11 @@ import jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_sugoroku
 
 import javax.imageio.ImageIO;
 
-class Test extends JPanel{
+class ShowP extends JPanel{
     int width;
     int height;
     String job;
-    Test(String job, int width, int height){
+    ShowP(String job, int width, int height){
         this.width = width;
         this.height = height;
         this.job = job;
@@ -28,17 +28,17 @@ class Test extends JPanel{
     }
 
     public void paintComponent(Graphics g){
-        BufferedImage imgTest = null;
+        BufferedImage imgshowplayer = null;
         Graphics2D g2 = (Graphics2D) g;
-        String pathTest = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/"+job+".png";
+        String pathshowplayer = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/"+job+".png";
 
         try {
-            imgTest = ImageIO.read(new File(pathTest));
+            imgshowplayer = ImageIO.read(new File(pathshowplayer));
         } catch (Exception e) {
             e.printStackTrace();
-            imgTest = null;
+            imgshowplayer = null;
         }
-        g2.drawImage(imgTest, 0,0, this.width, this.height, this);
+        g2.drawImage(imgshowplayer, 0,0, this.width, this.height, this);
     }
 }
 
@@ -156,16 +156,16 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test("warrior", 50, 100);
+                    ShowP showplayer = new ShowP("warrior", 50, 100);
                     if(u.getFighter() instanceof Warrior){
-                        test = new Test("warrior", 50, 100);
+                        showplayer = new ShowP("warrior", 50, 100);
                     }else if(u.getFighter() instanceof Magician){
-                        test = new Test("magician",50 , 100);
+                        showplayer = new ShowP("magician",50 , 100);
                     }else if(u.getFighter() instanceof Thief){
-                        test = new Test("thief", 50, 100);
+                        showplayer = new ShowP("thief", 50, 100);
                     }
-                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    add(test);
+                    showplayer.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(showplayer);
                 }
                 
                 if(getRandomNumber() - getWalk()== 0){
@@ -177,7 +177,7 @@ class MV extends JPanel{
                     FightCharacter fighter2 = new Zombie();
 
                     for(User user : getUsers()){
-                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser()) && user.getFighter().getHealth() != "死亡" && getUsers().get(getCuser()).getFighter().getHealth() != "死亡"){
                             encount = true;
 
                             fighter1 = getUsers().get(getCuser()).getFighter();
@@ -205,7 +205,7 @@ class MV extends JPanel{
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
-                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル") && getUsers().get(getCuser()).getFighter().getHealth() != "死亡") {
                         Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
                         
                         JButton back = new JButton("マップに戻る");
@@ -224,6 +224,42 @@ class MV extends JPanel{
 
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("アイテムショップ")){
+                        SugorokuGame itemShop = new SugorokuGame();
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        itemShop.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(itemShop);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("スタート")){
+                        Castle castle = new Castle(getUsers().get(getCuser()).getFighter());
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        castle.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(castle);
                         repaint();
                     }
                     setCuser(getCuser() + 1);
@@ -252,16 +288,16 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test("warrior", 50, 100);
+                    ShowP showplayer = new ShowP("warrior", 50, 100);
                     if(u.getFighter() instanceof Warrior){
-                        test = new Test("warrior", 50, 100);
+                        showplayer = new ShowP("warrior", 50, 100);
                     }else if(u.getFighter() instanceof Magician){
-                        test = new Test("magician", 50, 100);
+                        showplayer = new ShowP("magician", 50, 100);
                     }else if(u.getFighter() instanceof Thief){
-                        test = new Test("thief", 50, 100);
+                        showplayer = new ShowP("thief", 50, 100);
                     }
-                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    add(test);
+                    showplayer.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(showplayer);
                 }
                 
                 if(getRandomNumber() - getWalk()== 0){
@@ -273,7 +309,7 @@ class MV extends JPanel{
                     FightCharacter fighter2 = new Zombie();
 
                     for(User user : getUsers()){
-                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser()) && user.getFighter().getHealth() != "死亡" && getUsers().get(getCuser()).getFighter().getHealth() != "死亡"){
                             encount = true;
 
                             fighter1 = getUsers().get(getCuser()).getFighter();
@@ -301,7 +337,8 @@ class MV extends JPanel{
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
-                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル") && getUsers().get(getCuser()).getFighter().getHealth() != "死亡") {
+
                         Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
                         
                         JButton back = new JButton("マップに戻る");
@@ -320,6 +357,42 @@ class MV extends JPanel{
 
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("アイテムショップ")){
+                        SugorokuGame itemShop = new SugorokuGame();
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        itemShop.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(itemShop);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("スタート")){
+                        Castle castle = new Castle(getUsers().get(getCuser()).getFighter());
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        castle.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(castle);
                         repaint();
                     }
                     setCuser(getCuser() + 1);
@@ -348,16 +421,16 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test("warrior", 50, 100);
+                    ShowP showplayer = new ShowP("warrior", 50, 100);
                     if(u.getFighter() instanceof Warrior){
-                        test = new Test("warrior", 50, 100);
+                        showplayer = new ShowP("warrior", 50, 100);
                     }else if(u.getFighter() instanceof Magician){
-                        test = new Test("magician", 50, 100);
+                        showplayer = new ShowP("magician", 50, 100);
                     }else if(u.getFighter() instanceof Thief){
-                        test = new Test("thief", 50, 100);
+                        showplayer = new ShowP("thief", 50, 100);
                     }
-                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    add(test);
+                    showplayer.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(showplayer);
                 }
                 
                 if(getRandomNumber() - getWalk()== 0){
@@ -369,7 +442,7 @@ class MV extends JPanel{
                     FightCharacter fighter2 = new Zombie();
 
                     for(User user : getUsers()){
-                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser()) && user.getFighter().getHealth() != "死亡" && getUsers().get(getCuser()).getFighter().getHealth() != "死亡"){
                             encount = true;
 
                             fighter1 = getUsers().get(getCuser()).getFighter();
@@ -397,7 +470,8 @@ class MV extends JPanel{
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
-                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル") && getUsers().get(getCuser()).getFighter().getHealth() != "死亡") {
+
                         Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
                         
                         JButton back = new JButton("マップに戻る");
@@ -416,6 +490,42 @@ class MV extends JPanel{
 
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("アイテムショップ")){
+                        SugorokuGame itemShop = new SugorokuGame();
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        itemShop.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(itemShop);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("スタート")){
+                        Castle castle = new Castle(getUsers().get(getCuser()).getFighter());
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        castle.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(castle);
                         repaint();
                     }
                     setCuser(getCuser() + 1);
@@ -444,16 +554,16 @@ class MV extends JPanel{
                 removeAll();
 
                 for (User u : getUsers()){
-                    Test test = new Test("warrior", 50, 100);
+                    ShowP showplayer = new ShowP("warrior", 50, 100);
                     if(u.getFighter() instanceof Warrior){
-                        test = new Test("warrior", 50, 100);
+                        showplayer = new ShowP("warrior", 50, 100);
                     }else if(u.getFighter() instanceof Magician){
-                        test = new Test("magician", 50, 100);
+                        showplayer = new ShowP("magician", 50, 100);
                     }else if(u.getFighter() instanceof Thief){
-                        test = new Test("thief", 50, 100);
+                        showplayer = new ShowP("thief", 50, 100);
                     }
-                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    add(test);
+                    showplayer.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    add(showplayer);
                 }
                 
                 if(getRandomNumber() - getWalk()== 0){
@@ -465,7 +575,7 @@ class MV extends JPanel{
                     FightCharacter fighter2 = new Zombie();
 
                     for(User user : getUsers()){
-                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser())){
+                        if((user.getSpace().getPoint() == getUsers().get(getCuser()).getSpace().getPoint()) && user != getUsers().get(getCuser()) && user.getFighter().getHealth() != "死亡" && getUsers().get(getCuser()).getFighter().getHealth() != "死亡"){
                             encount = true;
 
                             fighter1 = getUsers().get(getCuser()).getFighter();
@@ -493,7 +603,8 @@ class MV extends JPanel{
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
                         repaint();
-                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル")) {
+                    }else if (getUsers().get(getCuser()).getSpace().getEvent().getName().equals("バトル") && getUsers().get(getCuser()).getFighter().getHealth() != "死亡") {
+
                         Pvn battlePanel = new Pvn(getUsers().get(getCuser()).getFighter(), new Zombie());
                         
                         JButton back = new JButton("マップに戻る");
@@ -512,6 +623,42 @@ class MV extends JPanel{
 
                         battlePanel.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
                         add(battlePanel);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("アイテムショップ")){
+                        SugorokuGame itemShop = new SugorokuGame();
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        itemShop.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(itemShop);
+                        repaint();
+                    }else if(getUsers().get(getCuser()).getSpace().getEvent().getName().equals("スタート")){
+                        Castle castle = new Castle(getUsers().get(getCuser()).getFighter());
+
+                        JButton back = new JButton("マップに戻る");
+                        back.setFont(fm);
+                        back.setBounds(660, Main.HEIGHT - 70, 300, 70);
+                        add(back);
+                        ActionListener backAction = new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                removeAll();
+                                repaint();
+                            };
+                        };
+                        back.addActionListener(backAction);
+
+                        castle.setBounds(Main.WIDTH/2 - Pvp.WIDTH/2 , Main.HEIGHT/2 - Pvp.HEIGHT/2 , Pvp.WIDTH , Pvp.HEIGHT);
+                        add(castle);
                         repaint();
                     }
                     setCuser(getCuser() + 1);
@@ -542,16 +689,16 @@ class MV extends JPanel{
                 bt.add(turn);
 
                 for (User u : getUsers()){
-                    Test test = new Test("warrior", 50, 100);
+                    ShowP showplayer = new ShowP("warrior", 50, 100);
                     if(u.getFighter() instanceof Warrior){
-                        test = new Test("warrior", 50, 100);
+                        showplayer = new ShowP("warrior", 50, 100);
                     }else if(u.getFighter() instanceof Magician){
-                        test = new Test("magician",50, 100);
+                        showplayer = new ShowP("magician",50, 100);
                     }else if(u.getFighter() instanceof Thief){
-                        test = new Test("thief", 50, 100);
+                        showplayer = new ShowP("thief", 50, 100);
                     }
-                    test.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
-                    bt.add(test);
+                    showplayer.setBounds(getCx(u.getSpace().getPoint()), getCy(u.getSpace().getPoint()), CHARACTERWIDTH, CHARACTERHEIGHT);
+                    bt.add(showplayer);
                 }
 
                 if (getWalk() < getRandomNumber()){

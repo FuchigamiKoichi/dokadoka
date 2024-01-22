@@ -1,7 +1,5 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_battle;
 
-import java.util.ArrayList;
-
 public class Item{    
     private String itemName;
     private String function;

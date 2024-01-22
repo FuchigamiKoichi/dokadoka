@@ -28,6 +28,11 @@ public class User implements Comparable<User>{
         return point;
     }
 
+    public int getMoney(){
+        int money = this.getFighter().getMoney();
+        return money;
+    }
+
     public void setSpace(Space point) {
         this.point = point;
     }
@@ -48,8 +53,9 @@ public class User implements Comparable<User>{
         this.playerRanking = playerRanking;
     }
 
-    public int compareTo(User otherUser){
-        
-        return Integer.compare(this.playerRanking,otherUser.playerRanking);
+    @Override
+    public int compareTo(User other){
+        //所持金の比較
+        return Integer.compare(other.getMoney(), this.getMoney());
     }
 }
