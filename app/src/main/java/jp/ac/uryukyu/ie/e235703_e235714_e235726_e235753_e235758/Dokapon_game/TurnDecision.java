@@ -34,20 +34,4 @@ public class TurnDecision{
             System.out.println("プレイヤーのターン");
         }
     }
-
-    public static void main(String[] args) {
-        var master = new TurnDecision();
-        var warrior1 = new Warrior("戦士", 0, 0, 0, 0,0,0,"健康");
-        var slime = new Enemy("スライム",0,0, 0, 0,0,0,"通常");
-        ArrayList <FightCharacter> order = new ArrayList<>();
-        
-        order.add(slime);
-        order.add(warrior1);
-        System.out.println(order);
-        FightCharacter target1 = order.get(0);
-        
-        
-        master.determineTurn(target1);
-        
-    }
 }

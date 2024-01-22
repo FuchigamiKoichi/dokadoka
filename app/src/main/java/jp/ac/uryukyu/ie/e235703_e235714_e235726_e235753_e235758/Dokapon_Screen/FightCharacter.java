@@ -2,10 +2,10 @@ package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Dokapon_Screen;
 
 import java.util.ArrayList;
 public class FightCharacter extends Character{;
-    final int defaultHP = 100;
+    final int defaultHP = 100;//レベル1のときのHP
     double HP;
     int gainHP;
-    int SP;
+    private int SP;
     int DF;
     int AT;
     int MP;
@@ -14,6 +14,7 @@ public class FightCharacter extends Character{;
     final int defaultLevel = 1;
     private final int EXPERIENCE_TO_NEXTLEVEL = 100;
     private int level = 1;
+    
     //ArrayList <Weapon> weapons = new ArrayList<>();
     //DefendWeapon defendWeapon;
     //AttackWeapon attackWeapon;
@@ -95,9 +96,10 @@ public class FightCharacter extends Character{;
     public void takenDamage(double damage){
         this.HP -= damage;
     }
-    
-    
 
+    public int getDefaultHP(){
+        return this.defaultHP;
+    }
 
     @Override
     //キャラ情報を表示するためのメソッド

@@ -158,35 +158,4 @@ public class FightCharacter extends Character{;
             System.out.println(weapon.getName());
         }
     }
-    
-
-    
-    
-    
-    public static void main(String[] args) {
-        FightCharacter FC = new FightCharacter("Ken",30, 0, 4, 5, 0, 0,"健康");
-        System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " + "EXP:" + FC.getEXP());
-        
-        FC.gainEXP(100);
-        System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " +"EXP:" + FC.getEXP());
-
-        FC.gainEXP(80);
-        System.out.println(FC.getName() + " - Level:" + FC.getLevel() + " " +"EXP:" + FC.getEXP());
-
-
-        AttackWeapon sword = new AttackWeapon("ソード", 10, -1, 0, 0, 0,"眠り(確率1/8)");
-        DefendWeapon shield = new DefendWeapon("シールド", 2, 15, 0, 0, 0,"毒耐性");
-        AttackWeapon spire = new AttackWeapon("スピア", 15, 0, 0, 0, 0,"眠り耐性");
-        
-        FC.getAttackWeapon(sword);
-        FC.getDefenseWeapon(shield);
-        System.out.println(FC.AT + "→"+ FC.getAttack());
-        System.out.println(FC.DF + "→" + FC.getDefance());
-        FC.getAttackWeapon(spire);
-        System.out.println(FC.AT + "→" + FC.getAttack());
-
-        FC.displayWeapon();
-
-
-    }   
 }

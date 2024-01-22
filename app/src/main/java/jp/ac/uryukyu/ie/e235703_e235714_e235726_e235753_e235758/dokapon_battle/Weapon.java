@@ -48,14 +48,5 @@ class DefendWeapon extends Weapon{
     DefendWeapon(String Name,int AT,int DF,int MG,int SP,int HP,String effect){
         super(Name, AT, DF,MG,SP,HP,effect);
     }
-    public static void main(String[] args) {
-        WeaponManager weaponManager = new WeaponManager();
-        FightCharacter FC = new FightCharacter("プレイヤー１", 0, 0, 0, 0, 0, 0, "健康");
-        //武器の追加
-        Weapon sword = new Weapon("ロングソード",10, 0,0,0,0,"眠り(確率1/8)");
-        Weapon shield = new Weapon("青銅の盾",0, 15,0,0,0,"毒耐性");
-        weaponManager.weapons.add(sword);
-        weaponManager.weapons.add(shield);
-    }
 }
     

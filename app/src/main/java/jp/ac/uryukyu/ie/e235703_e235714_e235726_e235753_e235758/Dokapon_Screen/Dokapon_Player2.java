@@ -46,9 +46,6 @@ public class Dokapon_Player2 extends JFrame{
     //モンスターのコマンドをランダムで選ばせる
     int randomSelect = new Random().nextInt(1,4);
 
-
-
-
     public Dokapon_Player2(){
 
         setTitle("どかVS プレイヤー用");
@@ -66,7 +63,6 @@ public class Dokapon_Player2 extends JFrame{
         
         battlePanel.add(playerStatusPanel);
         battlePanel.add(enemyStatusPanel);
-        //battlePanel.add(attackPanel);
         
         currentState = State.MENU;
         switchState(currentState);
@@ -109,16 +105,16 @@ public class Dokapon_Player2 extends JFrame{
         // AttackPanel を除外する
             battlePanel.remove(oldPanel);
 
-            // DefendPanel を BattlePanel に追加し、表示する
-            battlePanel.add(newPanel);
-            newPanel.setVisible(true);
+        // DefendPanel を BattlePanel に追加し、表示する
+        battlePanel.add(newPanel);
+        newPanel.setVisible(true);
 
-            // AttackPanel を非表示にする（必要に応じて再利用する場合はコメントアウト）
-            oldPanel.setVisible(false);
+        // AttackPanel を非表示にする（必要に応じて再利用する場合はコメントアウト）
+        oldPanel.setVisible(false);
 
-            // BattlePanel を再描画
-            battlePanel.revalidate();
-            battlePanel.repaint();
+        // BattlePanel を再描画
+        battlePanel.revalidate();
+        battlePanel.repaint();
 
     }
     //ランダムで選択された以外の数字を返す
@@ -162,10 +158,10 @@ public class Dokapon_Player2 extends JFrame{
             allAttack = AC.Attack_method(firstPlayer, secondPlayer, player_DChoice);
             
         }else if(player_AChoice == 2){
-            //allAttack = MC.Attack_method(firstPlayer,secondPlayer,player_DChoice);
+            allAttack = MC.Attack_method(firstPlayer,secondPlayer,player_DChoice);
             allAttack = 30;
         }else if(player_AChoice == 3){
-            //allAttack = SC.Attack_method(firstPlayer,secondPlayer,player_DChoice);
+            allAttack = SC.Attack_method(firstPlayer,secondPlayer,player_DChoice);
             allAttack = 10;
         }else if(player_AChoice == 4){
             firstPlayer.AT *= 1.5;
@@ -221,7 +217,6 @@ public class Dokapon_Player2 extends JFrame{
             });
             add(continueButton);
             doka.attackPanel = new AttackPanel(doka);
-            //doka.defendPanel = new DefendPanel(doka);
             doka.battlePanel = new BattlePanel(doka);
             doka.battlePanel.add(doka.attackPanel);
             
@@ -242,20 +237,18 @@ public class Dokapon_Player2 extends JFrame{
             doka.enemyHP = 100;
 
             // Player HP Bar
-            doka.playerHPBar = new JProgressBar(0, doka.playerHP);
+            doka.playerHPBar = new JProgressBar(0, (int)doka.fighters[doka.randomValue].getHP());
             doka.playerHPBar.setStringPainted(true);
-            doka.playerHPBar.setValue(doka.playerHP);   // 現在の値も初期HPに設定
+            doka.playerHPBar.setValue((int)doka.fighters[doka.randomValue].getHP());   // 現在の値も初期HPに設定
             add(new JLabel(doka.fighters[doka.randomValue].getName()+" HP"));
             add(doka.playerHPBar);
 
             // Enemy HP Bar
-            doka.enemyHPBar = new JProgressBar(0, doka.enemyHP);
+            doka.enemyHPBar = new JProgressBar(0, (int)doka.fighters[doka.Seconder()].getHP());
             doka.enemyHPBar.setStringPainted(true);
-            doka.enemyHPBar.setValue(doka.enemyHP);   // 現在の値も初期HPに設定
-            add(new JLabel(doka.fighters[doka.Seconder()].getName()+" HP"));
+            doka.enemyHPBar.setValue((int)doka.fighters[doka.Seconder()].getHP());   // 現在の値も初期HPに設定
+            add(new JLabel(doka.fighters[doka.Seconder()].getName() + " HP"));
             add(doka.enemyHPBar);
-            
-
         }
     }
     //攻撃コマンドパネル
@@ -263,7 +256,6 @@ public class Dokapon_Player2 extends JFrame{
     private static class AttackPanel extends JPanel{
         Dokapon_Player2 doka;
         public AttackPanel(Dokapon_Player2 doka){
-            setLayout(null);
 
             this.doka = doka;
             doka.FirstTurnLabel = new JLabel(doka.先行の人 +"はコマンドを選択してください");
@@ -271,7 +263,7 @@ public class Dokapon_Player2 extends JFrame{
             System.out.println(doka.playerTurn);
             
             JButton attack = new JButton("こうげき");
-            attack.setBounds(200, 800, 300, 100);
+    
 
             JButton magic = new JButton("まほう");
             JButton special = new JButton("ひっさつ");
@@ -289,12 +281,6 @@ public class Dokapon_Player2 extends JFrame{
             
             validate();
             repaint();
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, 100, 100);
         }
     }
 
@@ -410,7 +396,7 @@ public class Dokapon_Player2 extends JFrame{
             JLabel PlayerAT = new JLabel("AT "+ doka.fighters[0].AT);
             JLabel PlayerDF = new JLabel("DF"+ doka.fighters[0].DF);
             JLabel PlayerMG = new JLabel("MG"+ doka.fighters[0].MP);
-            JLabel PlayerSP = new JLabel("SP"+ doka.fighters[0].SP);
+            JLabel PlayerSP = new JLabel("SP"+ doka.fighters[0].getSP());
 
             add(PlayerName);
             add(PlayerAT);
@@ -426,7 +412,7 @@ public class Dokapon_Player2 extends JFrame{
             JLabel EnemyAT = new JLabel("AT "+ doka.fighters[1].AT);
             JLabel EnemyDF = new JLabel("DF "+ doka.fighters[1].DF);
             JLabel EnemyMG = new JLabel("MG" + doka.fighters[1].MP);
-            JLabel EnemySP = new JLabel("SP "+ doka.fighters[1].SP);
+            JLabel EnemySP = new JLabel("SP "+ doka.fighters[1].getSP());
 
             add(EnemyName);
             add(EnemyAT);
