@@ -38,7 +38,8 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass.set("Main")
+    mainClass.set("jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Main")
+    // mainClass = 'jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Main'
 }
 
 tasks.named<Test>("test") {
@@ -48,6 +49,6 @@ tasks.named<Test>("test") {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "Main"
+        attributes["Main-Class"] = "jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show.Main"
     }
 }

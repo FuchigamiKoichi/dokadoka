@@ -1,6 +1,6 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.dokapon_sugoroku;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,8 +10,8 @@ public class Map {
     public Map(int map) throws Exception{
         this.spaces = new ArrayList<>();
         //ファイルから読み込むFIleInputStreamのインスタンスを作り、それをScannerクラスに渡す
-        String path = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/WORLD/map"+map+".csv";
-		FileInputStream fis = new FileInputStream(path);
+        // String path = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/WORLD/map"+map+".csv";
+		InputStream fis = getClass().getClassLoader().getResourceAsStream("WORLD/map1.csv");
 		Scanner scanner = new Scanner(fis);
         int i = 1; //読み込み行数
 

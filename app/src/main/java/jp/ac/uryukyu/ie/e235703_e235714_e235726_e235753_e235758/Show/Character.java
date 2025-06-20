@@ -1,5 +1,6 @@
 package jp.ac.uryukyu.ie.e235703_e235714_e235726_e235753_e235758.Show;
 
+import java.io.InputStream;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,10 +31,9 @@ class ShowP extends JPanel{
     public void paintComponent(Graphics g){
         BufferedImage imgshowplayer = null;
         Graphics2D g2 = (Graphics2D) g;
-        String pathshowplayer = System.getProperty("user.dir") + "/app/src/main/java/jp/ac/uryukyu/ie/e235703_e235714_e235726_e235753_e235758/IMG/"+job+".png";
 
         try {
-            imgshowplayer = ImageIO.read(new File(pathshowplayer));
+            imgshowplayer = ImageIO.read(getClass().getClassLoader().getResourceAsStream("IMG/"+job+".png"));
         } catch (Exception e) {
             e.printStackTrace();
             imgshowplayer = null;
